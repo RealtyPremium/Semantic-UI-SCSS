@@ -1,6 +1,6 @@
 # Semantic-UI-SCSS
 
-[![Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NMYPWP6VCWGKN)](http://i.imgur.com/sMi7BNV.png)
+[![Donate](http://i.imgur.com/sMi7BNV.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NMYPWP6VCWGKN)
 
 
 
