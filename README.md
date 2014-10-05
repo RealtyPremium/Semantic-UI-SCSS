@@ -19,3 +19,14 @@ That's it!!
 The converter will automatically fetch the latest files from the Semantic UI repo and convert the LESS fils on the fly :)
 
 After executing the rake task, you should see a new folder called `semantic`, inside which you will have sub-folders containing the converted SCSS files.
+
+### Roadmap
+
+At present, the converter only converts the LESS files.
+
+#### Coming soon:
+
+* Clone fonts from the source repo.
+* Clone images from the source repo.
+* Add automatic Compass conversion.
+* SASS output.
