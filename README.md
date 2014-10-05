@@ -6,11 +6,13 @@
 
 ### What this is
 
-This is the much needed Semantic UI SASS port. Based on bootstrap-sass's converter.
+This is the much needed Semantic UI SCSS port. Based on bootstrap-sass's converter.
 
 ### How to use
 
-Just clone this repo to your local environment and run:
+You need to have ruby installed on your system.
+
+Just clone this repo to your local environment and run this from your command line:
 
 `rake convert`
 
@@ -29,5 +31,6 @@ At present, the converter only converts the LESS files.
 
 * Clone fonts from the source repo.
 * Clone images from the source repo.
+* Clone/convert JS from the source repo.
 * Add automatic Compass conversion.
-* SASS output.
+* SASS port.
