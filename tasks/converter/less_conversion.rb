@@ -177,7 +177,15 @@ class Converter
       file   = deinterpolate_vararg_mixins(file)
       file   = replace_calculation_semantics(file)
       file   = replace_file_imports(file)
+      file   = replace_vendor_prefixes(file)
       file
+    end
+
+    def replace_vendor_prefixes file
+      match1 =  file.match /(-webkit-.*?;)|(-khtml-.*?;)|(-ms-.*?;)|(-moz-.*?;)|(-o-.*?;)/
+      #match2 = match1.sub! /(-webkit-.*?)|(-khtml-.*?)|(-ms-.*?)|(-moz-.*?)|(-o-.*?)/, "@include " unless match1.nil?
+      puts match1
+
     end
 
     def sass_fn_exists(fn)

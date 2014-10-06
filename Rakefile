@@ -8,5 +8,10 @@ task :convert, :branch do |t, args|
   require './tasks/converter'
   Converter.new(branch: args[:branch]).process_semantic
 end
+task :parse do |t, args|
+  #TODO
+  require './tasks/parser/parser'
+
+end
 
 task default: :convert

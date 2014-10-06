@@ -31,4 +31,7 @@ namespace :bower do
       end
     end
   end
+  task :parse do
+  end
+
 end
