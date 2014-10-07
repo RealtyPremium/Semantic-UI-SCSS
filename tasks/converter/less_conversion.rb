@@ -177,16 +177,31 @@ class Converter
       file   = deinterpolate_vararg_mixins(file)
       file   = replace_calculation_semantics(file)
       file   = replace_file_imports(file)
-      #file   = replace_vendor_prefixes(file)
+      file   = replace_vendor_prefixes(file)
+      file   = remove_dupes(file)
       file
     end
 
     def replace_vendor_prefixes file
-      match1 =  file.match(/(-webkit-.*?;)|(-khtml-.*?;)|(-ms-.*?;)|(-moz-.*?;)|(-o-.*?;)/).to_s
-      match2 = match1.sub!(/(-webkit-.*?)|(-khtml-.*?)|(-ms-.*?)|(-moz-.*?)|(-o-.*?)/, "@include ").to_s unless match1.nil?
-      property_val = match2.match(/(?<=\:)(.*?)(?=\;)/) unless match2.nil?
-      compassd = match2.sub! /(:.*?;)/, "(#{property_val});" unless match2.nil?
-      compassd
+      new_css = ''
+      file.each_line do |line|
+        match1 =  line.match(/(-webkit-.*?;)|(-khtml-.*?;)|(-ms-.*?;)|(-moz-.*?;)|(-o-.*?;)/).to_s
+        match2 = match1.sub!(/(-webkit-.*?)|(-khtml-.*?)|(-ms-.*?)|(-moz-.*?)|(-o-.*?)/, "@include ").to_s unless match1.nil?
+        property_val = match2.match(/(?<=\:)(.*?)(?=\;)/) unless match2.nil?
+        compass_style = match2.sub! /(:.*?;)/, "(#{property_val});" unless match2.nil?
+        if match1.nil? or compass_style.nil?
+          new_css = new_css+line
+        else
+          new_css = new_css+compass_style
+        end
+      end
+      new_css
+    end
+
+
+    def remove_dupes file
+      #http://sass-lang.com/documentation/Sass/Engine.html
+      #https://coderwall.com/p/fbawrq
     end
 
     def sass_fn_exists(fn)

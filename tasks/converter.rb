@@ -20,6 +20,7 @@ require 'strscan'
 require 'forwardable'
 require 'term/ansicolor'
 require 'fileutils'
+require 'sass'
 
 require_relative 'converter/fonts_conversion'
 require_relative 'converter/less_conversion'
