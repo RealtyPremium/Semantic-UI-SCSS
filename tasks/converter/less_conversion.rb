@@ -178,11 +178,15 @@ class Converter
       file   = replace_calculation_semantics(file)
       file   = replace_file_imports(file)
       file   = replace_vendor_prefixes(file)
-      file   = remove_dupes(file)
+      #file   = remove_dupes(file)
       file
     end
 
     def replace_vendor_prefixes file
+
+      special_css_properties(file)
+
+=begin
       new_css = ''
       file.each_line do |line|
         match1 =  line.match(/(-webkit-.*?;)|(-khtml-.*?;)|(-ms-.*?;)|(-moz-.*?;)|(-o-.*?;)/).to_s
@@ -196,8 +200,39 @@ class Converter
         end
       end
       new_css
+=end
+
+
     end
 
+    def special_css_properties file
+      case file
+      when /(-webkit-.*?;)|(-khtml-.*?;)|(-ms-.*?;)|(-moz-.*?;)|(-o-.*?;)/m
+        arr = file.scan /(-webkit-.*?;)|(-khtml-.*?;)|(-ms-.*?;)|(-moz-.*?;)|(-o-.*?;)/m
+        arr.reject!(&:nil?)
+        arr = clean_array(arr)
+        property = extract_compass_property(arr)
+        file.gsub!(/(-webkit-.*?;)|(-khtml-.*?;)|(-ms-.*?;)|(-moz-.*?;)|(-o-.*?;)/m, property)
+      end
+      file
+    end
+
+    def clean_array arr
+      arr.each do |k|
+        k.reject!(&:nil?)
+      end
+      arr
+    end
+
+    def extract_compass_property arr
+      first_property_name = arr.first.first unless arr.first.nil?
+      unless first_property_name.nil?
+        first_property_name.sub!(/(-webkit-.*?)|(-khtml-.*?)|(-ms-.*?)|(-moz-.*?)|(-o-.*?)/, "@include ").delete(' ')
+        first_property_value = first_property_name.match(/(?<=\:)(.*?)(?=\;)/)[0].lstrip unless first_property_name.match(/(?<=\:)(.*?)(?=\;)/).nil?
+        first_property_name.sub! /(:.*?;)/, "(#{first_property_value});"
+      end
+      first_property_name
+    end
 
     def remove_dupes file
       #http://sass-lang.com/documentation/Sass/Engine.html
