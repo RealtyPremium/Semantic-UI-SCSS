@@ -147,20 +147,19 @@ class Converter
       @semantic_less_files ||= scan_less_folders
     end
 
+    def src_folder
+      get_tree(get_tree_sha('src', get_tree(get_tree_sha('definitions'))))
+    end
+
     def scan_less_folders
       #The code below goes into folders this order: master->build->less
-      #get_tree(get_tree_sha('collections', get_tree(get_tree_sha('less', get_tree(get_tree_sha('build'))))))
-
-      get_paths_by_type('collections', /\.less$/,
-        get_tree(get_tree_sha('collections', get_tree(get_tree_sha('less', get_tree(get_tree_sha('build'))))))).map { |f| "collections/#{f}" } +
-      get_paths_by_type('elements', /\.less$/,
-        get_tree(get_tree_sha('elements', get_tree(get_tree_sha('less', get_tree(get_tree_sha('build'))))))).map { |f| "elements/#{f}" } +
-      get_paths_by_type('modules', /\.less$/,
-        get_tree(get_tree_sha('modules', get_tree(get_tree_sha('less', get_tree(get_tree_sha('build'))))))).map { |f| "modules/#{f}" } +
-      get_paths_by_type('views', /\.less$/,
-        get_tree(get_tree_sha('views', get_tree(get_tree_sha('less', get_tree(get_tree_sha('build'))))))).map { |f| "views/#{f}" }
+      get_paths_by_type('collections', /\.less$/, get_tree(get_tree_sha('collections', src_folder ))).map { |f| "collections/#{f}" } +
+      get_paths_by_type('elements', /\.less$/, get_tree(get_tree_sha('elements', src_folder ))).map { |f| "elements/#{f}" } +
+      get_paths_by_type('modules', /\.less$/, get_tree(get_tree_sha('modules', src_folder ))).map { |f| "modules/#{f}" } +
+      get_paths_by_type('views', /\.less$/, get_tree(get_tree_sha('views', src_folder ))).map { |f| "views/#{f}" }
 
     end
+
 
     # apply general less to scss conversion
     def convert_to_scss(file)

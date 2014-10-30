@@ -34,10 +34,10 @@ class Converter
   include JsConversion
   include FontsConversion
 
-  def initialize(repo: 'Semantic-Org/Semantic-UI', branch: 'master', save_to: {}, cache_path: 'tmp/converter-semantic')
+  def initialize(repo: 'Semantic-Org/Semantic-UI', branch: '1.0', save_to: {}, cache_path: 'tmp/converter-semantic')
     @logger     = Logger.new
     @repo       = repo
-    @branch     = branch || 'master'
+    @branch     = branch || '1.0'
     @branch_sha = get_branch_sha
     @cache_path = cache_path
     @repo_url   = "https://github.com/#@repo"
