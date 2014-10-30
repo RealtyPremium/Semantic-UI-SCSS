@@ -1,38 +1,36 @@
 /*
  * # Semantic - Shape
- * http://github.com/jlukic/semantic-ui/
+ * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2014 Contributors
+ * Copyright 2014 Contributor
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
+
+
+/*******************************
+            Theme
+*******************************/
+
+$type    : 'module';
+$element : 'shape';
+
+$import '../../theme.config';
+
 
 /*******************************
               Shape
 *******************************/
 
 .ui.shape {
-  display: inline-block;
   position: relative;
-
-  -webkit-perspective: 2000px;
-  -moz-perspective: 2000px;
-  -ms-perspective: 2000px;
-  perspective: 2000px;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-
+  display: $display;
+  perspective: $perspective;
 }
 
 .ui.shape .sides {
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  -ms-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
 
@@ -40,55 +38,45 @@
   opacity: 1;
   width: 100%;
 
-  margin: 0em !important;
+  margin: $sideMargin !important;
 
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  backface-visibility: hidden;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
+  backface-visibility: $backfaceVisibility;
 }
 
 .ui.shape .side {
   display: none;
 }
 
+.ui.shape .side > * {
+  backface-visibility: visible !important;
+}
 
 /*******************************
              Types
 *******************************/
 
 .ui.cube.shape .side {
-  min-width: 15em;
-  height: 15em;
+  min-width: $cubeSize;
+  height: $cubeSize;
 
-  padding: 2em;
+  padding: $cubePadding;
 
-  background-color: #E6E6E6;
-  color: rgba(0, 0, 0, 0.6);
-  -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  background-color: $cubeBackground;
+  color: $cubeTextColor;
+  box-shadow: $cubeBoxShadow;
 }
 .ui.cube.shape .side > .content {
   width: 100%;
   height: 100%;
   display: table;
 
-  text-align: center;
-
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
+  text-align: $cubeTextAlign;
   user-select: text;
 }
 .ui.cube.shape .side > .content > div {
   display: table-cell;
   vertical-align: middle;
-  font-size: 2em;
+  font-size: $cubeFontSize;
 }
 
 /*******************************
@@ -129,10 +117,10 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  z-index: 100;
+  z-index: $animatingZIndex;
 }
 .ui.shape .hidden.side {
-  opacity: 0.4;
+  opacity: $hiddenSideOpacity;
 }
 
 
@@ -141,30 +129,17 @@
 ---------------*/
 
 .ui.shape.animating {
-  -webkit-transition:
-    all 0.6s ease-in-out;
-  ;
-  -moz-transition:
-    all 0.6s ease-in-out;
-  ;
-  transition:
-    all 0.6s ease-in-out;
-  ;
+  transition: $transition;
 }
 .ui.shape.animating .sides {
   position: absolute;
 }
 .ui.shape.animating .sides {
-  -webkit-transition: all 0.6s ease-in-out;
-  -moz-transition: all 0.6s ease-in-out;
-  transition: all 0.6s ease-in-out;
+  transition: $transition;
 }
 .ui.shape.animating .side {
-  -webkit-transition: opacity 0.6s ease-in-out;
-  -moz-transition: opacity 0.6s ease-in-out;
-  transition: opacity 0.6s ease-in-out;
+  transition: $sideTransition;
 }
-
 
 /*--------------
      Active
@@ -173,3 +148,5 @@
 .ui.shape .active.side {
   display: block;
 }
+
+@extend .loadUIOverrides;

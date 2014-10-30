@@ -1,24 +1,33 @@
 /*
  * # Semantic - Rating
- * http://github.com/jlukic/semantic-ui/
+ * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2014 Contributors
+ * Copyright 2014 Contributor
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
 
 /*******************************
+            Theme
+*******************************/
+
+$type    : 'module';
+$element : 'rating';
+
+$import '../../theme.config';
+
+
+/*******************************
            Rating
 *******************************/
 
 .ui.rating {
-  display: inline-block;
-
+  display: $display;
   font-size: 0em;
-  vertical-align: middle;
-  margin: 0em 0.5rem 0em 0em;
+  vertical-align: $verticalAlign;
+  margin: $margin;
 }
 .ui.rating:last-child {
   margin-right: 0em;
@@ -37,18 +46,16 @@
   cursor: pointer;
 
   margin: 0em;
-
-  width: 1em;
+  width: $iconHitbox;
+  text-align: center;
   height: auto;
   padding: 0em;
 
-  color: rgba(0, 0, 0, 0.15);
   font-weight: normal;
   font-style: normal;
+  vertical-align: $verticalAlign;
 }
-.ui.rating .icon:before {
-  content: "\2605";
-}
+
 
 /*******************************
              Types
@@ -58,21 +65,33 @@
         Star
 --------------------*/
 
+/* Inactive */
 .ui.star.rating .icon {
-  width: 1.2em;
-}
-
-/* Star */
-.ui.star.rating .icon:before {
-  content: '\f006';
-  font-family: 'Icons';
+  width: $starIconHitbox;
+  color: $starInactiveColor;
 }
 
 /* Active Star */
-.ui.star.rating .active.icon:before {
-  content: '\f005';
-  font-family: 'Icons';
+.ui.star.rating .active.icon {
+  color: $starActiveColor !important;
+  text-shadow: $starActiveShadow;
 }
+
+/* Selected Star */
+.ui.star.rating .icon.selected,
+.ui.star.rating .icon.selected.active {
+  color: $starSelectedColor !important;
+}
+
+.ui.star.rating.partial {
+  position: relative;
+  z-index: 1;
+}
+.ui.star.rating.partial:before {
+  position: absolute;
+  z-index: -1;
+}
+
 
 
 /*-------------------
@@ -80,34 +99,47 @@
 --------------------*/
 
 .ui.heart.rating .icon {
-  width: 1.2em;
-}
-.ui.heart.rating .icon:before {
-  content: '\f08a';
-  font-family: 'Icons';
+  width: $heartIconHitbox;
+  color: $heartInactiveColor;
 }
 
-/* Active */
-.ui.heart.rating .active.icon:before {
-  content: '\f004';
-  font-family: 'Icons';
-}
+/* Active Heart */
 .ui.heart.rating .active.icon {
-  color: #EF404A !important;
+  color: $heartActiveColor !important;
+  text-shadow: $heartActiveShadow;
 }
 
-/* Hovered */
-.ui.heart.rating .hover.icon,
-.ui.heart.rating .active.hover.icon {
-  color: #FF2733 !important;
+/* Selected Heart */
+.ui.heart.rating .icon.selected,
+.ui.heart.rating .icon.selected.active {
+  color: $heartSelectedColor !important;
 }
+
 
 /*******************************
              States
 *******************************/
 
+
+/* Inactive Icon */
+.ui.rating .icon {
+  color: $inactiveColor;
+}
+
+/* Active Icon */
+.ui.rating .active.icon {
+  color: $activeColor;
+}
+
+/* Selected Icon */
+.ui.rating .icon.selected,
+.ui.rating .icon.selected.active {
+  color: $hoverColor;
+}
+
+
 /*-------------------
-        Active
+       Disabled
 --------------------*/
 
 /* disabled rating */
@@ -115,44 +147,53 @@
   cursor: default;
 }
 
-/* active icons */
-.ui.rating .active.icon {
-  color: #FFCB08 !important;
-}
-
 
 /*-------------------
-        Hover
+     Interacting (Active)
 --------------------*/
 
-/* rating */
-.ui.rating.hover .active.icon {
-  opacity: 0.5;
+/* Selected Rating */
+.ui.rating.selected .active.icon {
+  opacity: $interactiveIconOpacity;
+}
+.ui.rating.selected .icon.selected,
+.ui.rating .icon.selected {
+  opacity: $interactiveSelectedIconOpacity;
 }
 
-/* icon */
-.ui.rating .icon.hover,
-.ui.rating .icon.hover.active {
-  opacity: 1;
-  color: #FFB70A !important;
-}
 
 
 /*******************************
           Variations
 *******************************/
 
+.ui.mini.rating .icon {
+  font-size: $mini;
+}
+.ui.tiny.rating .icon {
+  font-size: $tiny;
+}
 .ui.small.rating .icon {
-  font-size: 0.75rem;
+  font-size: $small;
 }
 .ui.rating .icon {
-  font-size: 1rem;
+  font-size: $medium;
 }
 .ui.large.rating .icon {
-  font-size: 1.5rem;
-  vertical-align: middle;
+  font-size: $large;
 }
 .ui.huge.rating .icon {
-  font-size: 2rem;
-  vertical-align: middle;
+  font-size: $huge;
 }
+.ui.massive.rating .icon {
+  font-size: $massive;
+}
+
+/* Realign */
+.ui.large.rating,
+.ui.huge.rating,
+.ui.massive.rating {
+  vertical-align: $oversizedVerticalAlign;
+}
+
+@extend .loadUIOverrides;

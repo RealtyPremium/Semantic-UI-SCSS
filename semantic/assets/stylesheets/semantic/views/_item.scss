@@ -1,37 +1,131 @@
-/*
- * # Semantic Item View
- * http://github.com/jlukic/semantic-ui/
+ /*
+ * # Semantic - Item
+ * http://github.com/semantic-org/semantic-ui/
  *
  *
  * Copyright 2014 Contributors
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
- * Released: April 17 2014
  */
 
+/*******************************
+            Theme
+*******************************/
+
+$type    : 'view';
+$element : 'item';
+
+$import '../../theme.config';
 
 /*******************************
             Standard
 *******************************/
 
+/*--------------
+      Item
+---------------*/
+
+.ui.items > .item {
+  table-layout: fixed;
+
+  display: $display;
+  margin: $itemSpacing 0em;
+  width: $width;
+  min-height: $minHeight;
+  background: $background;
+  padding: $padding;
+
+  border: $border;
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
+  transition: $transition;
+  z-index: $zIndex;
+}
+.ui.items > .item a {
+  cursor: pointer;
+}
 
 /*--------------
       Items
 ---------------*/
 
 .ui.items {
-  margin: 1em 0em 0em;
-}
-.ui.items:first-child {
-  margin-top: 0em;
-}
-.ui.items:last-child {
-  margin-bottom: -1em;
+  margin: $groupMargin;
 }
 
-/* Force Clearing */
-.ui.items:after {
+.ui.items:first-child {
+  margin-top: 0em !important;
+}
+.ui.items:last-child {
+  margin-bottom: 0em !important;
+}
+
+/*--------------
+      Item
+---------------*/
+
+.ui.items > .item {
+  min-width: 100%;
+}
+.ui.items > .item:after {
+  display: block;
+  content: ' ';
+  height: 0px;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+.ui.items > .item:first-child {
+  margin-top: 0em;
+}
+.ui.items > .item:last-child {
+  margin-bottom: 0em;
+}
+
+
+
+/*--------------
+     Images
+---------------*/
+
+.ui.items > .item > .image {
+  position: relative;
+  display: $imageDisplay;
+  float: $imageFloat;
+  margin: $imageMargin;
+  padding: $imagePadding;
+  max-height: $imageMaxHeight;
+  vertical-align: $imageVerticalAlign;
+}
+.ui.items > .item > .image > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: $imageBorderRadius;
+  border: $imageBorder;
+}
+
+.ui.items > .item > .image:only-child > img {
+  border-radius: $borderRadius;
+}
+
+
+/*--------------
+     Content
+---------------*/
+
+.ui.items > .item > .content {
+  display: block;
+  background: $contentBackground;
+  margin: $contentMargin;
+  padding: $contentPadding;
+  box-shadow: $contentBoxShadow;
+  font-size: $contentFontSize;
+  border: $contentBorder;
+  border-radius: $contentBorderRadius;
+}
+.ui.items > .item > .content:after {
   display: block;
   content: ' ';
   height: 0px;
@@ -40,99 +134,78 @@
   visibility: hidden;
 }
 
+.ui.items > .item > .image + .content {
+  width: $contentWidth;
+  display: $contentDisplay;
+  margin-left: $contentOffset;
+  vertical-align: $contentVerticalAlign;
+  padding-left: $contentImageDistance;
+}
+
+.ui.items > .item > .content > .header {
+  display: inline-block;
+  margin: $headerMargin;
+  font-family: $headerFont;
+  font-weight: $headerFontWeight;
+  color: $headerColor;
+}
+/* Default Header Size */
+.ui.items > .item > .content > .header:not(.ui) {
+  font-size: $headerFontSize;
+}
+
+.ui.items > .item > .content > .meta + .description{
+  margin-top: $descriptionDistance;
+}
+
 /*--------------
-      Item
+     Floated
 ---------------*/
 
-.ui.items > .row > .item,
-.ui.items > .item {
-  display: block;
+.ui.items > .item  .left.floated {
   float: left;
-  position: relative;
-  top: 0px;
-
-  width: 316px;
-  min-height: 375px;
-  margin: 0em 0.5em 2.5em;
-  padding: 0em;
-
-  background-color: #FFFFFF;
-  line-height: 1.2;
-  font-size: 1em;
-  -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
-
-  border-bottom: 0.2em solid rgba(0, 0, 0, 0.2);
-  border-radius: 0.33em;
-
-  -webkit-transition: -webkit-box-shadow 0.2s ease;
-  -moz-transition: box-shadow 0.2s ease;
-  transition: box-shadow 0.2s ease;
-
-  padding: 0.5em;
 }
-
-.ui.items a.item,
-.ui.items .item a {
-  cursor: pointer;
-}
-
-.ui.items .item,
-.ui.items .item > .image,
-.ui.items .item > .image .overlay,
-.ui.items .item > .content,
-.ui.items .item > .content > .meta,
-.ui.items .item > .content > .extra {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-/*--------------
-      Images
----------------*/
-
-.ui.items .item > .image {
-  display: block;
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.05);
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  border-radius: 0.2em;
-}
-.ui.items .item > .image > img {
-  display: block;
-  width: 100%;
+.ui.items > .item [class*="right floated"] {
+  float: right;
 }
 
 
 /*--------------
-     Content
+  Content Image
 ---------------*/
-.ui.items .item > .content {
-  padding: 0.75em 0.5em;
-}
-.ui.items .item > .content > .name {
-  display: block;
 
-  font-size: 1.25em;
-  font-weight: bold;
-  margin-bottom: 0.2em;
-  color: rgba(0, 0, 0, 0.7);
+.ui.items > .item .content img {
+  display: inline-block;
+  vertical-align: $contentImageVerticalAlign;
+  width: $contentImageWidth;
 }
-.ui.items .item > .content > .description {
-  clear: both;
-  margin: 0em 0em;
-  color: rgba(0, 0, 0, 0.45);
+.ui.items > .item img.avatar,
+.ui.items > .item .avatar img {
+  width: $avatarSize;
+  height: $avatarSize;
+  border-radius: $avatarBorderRadius;
 }
-.ui.items .item > .content > .description p {
-  margin: 0em 0em 0.2em;
+
+
+/*--------------
+   Description
+---------------*/
+
+.ui.items > .item > .content > .description {
+  max-width: $descriptionMaxWidth;
+  font-size: $descriptionFontSize;
+  line-height: $descriptionLineHeight;
+  color: $descriptionColor;
 }
-.ui.items .item > .content > .description p:last-child {
+
+/*--------------
+    Paragraph
+---------------*/
+
+.ui.items > .item > .content p {
+  margin: 0em 0em $paragraphDistance;
+}
+.ui.items > .item > .content p:last-child {
   margin-bottom: 0em;
 }
 
@@ -140,133 +213,171 @@
       Meta
 ---------------*/
 
-.ui.items .item .meta {
-  float: right;
-  color: rgba(0, 0, 0, 0.35);
+.ui.items > .item .meta {
+  font-size: $metaFontSize;
+  line-height: $metaLineHeight;
+  color: $metaColor;
 }
-.ui.items .item > .content > .meta + .name {
-  float: left;
+.ui.items > .item .meta * {
+  margin-right: $metaSpacing;
 }
+.ui.items > .item .meta :last-child {
+  margin-right: 0em;
+}
+
+.ui.items > .item .meta [class*="right floated"] {
+  margin-right: 0em;
+  margin-left: $metaSpacing;
+}
+
+/*--------------
+      Links
+---------------*/
+
+/* Generic */
+.ui.items > .item > .content a {
+  color: $contentLinkColor;
+  transition: $contentLinkTransition;
+}
+.ui.items > .item > .content a:hover {
+  color: $contentLinkHoverColor;
+}
+
+/* Header */
+.ui.items > .item > .content > a.header {
+  color: $headerLinkColor;
+}
+.ui.items > .item > .content > a.header:hover {
+  color: $headerLinkHoverColor;
+}
+
+/* Meta */
+.ui.items > .item .meta a {
+  color: $metaLinkColor;
+}
+.ui.items > .item .meta a:hover {
+  color: $metaLinkHoverColor;
+}
+
 
 
 /*--------------
      Labels
 ---------------*/
 
-/*-----star----- */
+/*-----Star----- */
 
-/* hover */
-.ui.items .item .star.label:hover::after {
-  border-right-color: #F6EFC3;
+/* Icon */
+.ui.items > .item > .content .favorite.icon {
+  cursor: pointer;
+  opacity: $actionOpacity;
+  transition: $actionTransition;
 }
-.ui.items .item .star.label:hover::after {
-  border-top-color: #F6EFC3;
+.ui.items > .item > .content .favorite.icon:hover {
+  opacity: $actionHoverOpacity;
+  color: $favoriteColor;
 }
-.ui.items .item .star.label:hover .icon {
-  color: #AC9400
-}
-
-/* active */
-.ui.items .item .star.label.active::after {
-  border-right-color: #F6EFC3;
-}
-.ui.items .item .star.label.active::after {
-  border-top-color: #F6EFC3;
-}
-.ui.items .item .star.label.active .icon {
-  color: #AC9400
+.ui.items > .item > .content .active.favorite.icon {
+  color: $favoriteActiveColor;
 }
 
-/*-----like----- */
+/*-----Like----- */
 
-/* hover */
-.ui.items .item .like.label:hover::after {
-  border-right-color: #F5E1E2;
+/* Icon */
+.ui.items > .item > .content .like.icon {
+  cursor: pointer;
+  opacity: $actionOpacity;
+  transition: $actionTransition;
 }
-.ui.items .item .like.label.active::after {
-  border-top-color: #F5E1E2;
+.ui.items > .item > .content .like.icon:hover {
+  opacity: $actionHoverOpacity;
+  color: $likeColor;
 }
-.ui.items .item .like.label:hover .icon {
-  color: #EF404A
-}
-/* active */
-.ui.items .item .like.label.active::after {
-  border-right-color: #F5E1E2;
-}
-.ui.items .item .like.label.active::after {
-  border-top-color: #F5E1E2;
-}
-.ui.items .item .like.label.active .icon {
-  color: #EF404A
+.ui.items > .item > .content .active.like.icon {
+  color: $likeActiveColor;
 }
 
+/*----------------
+  Extra Content
+-----------------*/
 
-
-/*--------------
-      Extra
----------------*/
-
-.ui.items .item .extra {
-  position: absolute;
-  width: 100%;
-  padding: 0em 0.5em;
-  bottom: -2em;
-  left: 0em;
-  height: 1.5em;
-  color: rgba(0, 0, 0, 0.25);
-
-  -webkit-transition: color 0.2s ease;
-  -moz-transition: color 0.2s ease;
-  transition: color 0.2s ease;
+.ui.items > .item .extra {
+  display: $extraDisplay;
+  position: $extraPosition;
+  background: $extraBackground;
+  margin: $extraMargin;
+  width: $extraWidth;
+  padding: $extraPadding;
+  top: $extraTop;
+  left: $extraLeft;
+  color: $extraColor;
+  box-shadow: $extraBoxShadow;
+  transition: $extraTransition;
+  border-top: $extraDivider;
 }
-.ui.items .item .extra > img {
-  display: inline-block;
-  border-radius: 500px 500px 500px 500px;
-  margin-right: 0.25em;
-  vertical-align: middle;
-  width: 2em;
+.ui.items > .item .extra > * {
+  margin: $extraRowSpacing $extraSpacing 0em 0em;
 }
-.ui.items .item .extra .left {
-  float: left;
+.ui.items > .item .extra > [class*="right floated"] {
+  margin: $extraRowSpacing 0em 0em $extraSpacing;
 }
-.ui.items .item .extra .right {
-  float: right;
+
+.ui.items > .item .extra:after {
+  display: block;
+  content: ' ';
+  height: 0px;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
 }
 
 
 /*******************************
-           States
+          Responsive
 *******************************/
 
-.ui.items .item:hover {
-  cursor: pointer;
-  z-index: 5;
-
-  -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
-
-          box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
-}
-.ui.items .item:hover .extra {
-  color: rgba(0, 0, 0, 0.5);
+/* Default Image Width */
+.ui.items > .item > .image:not(.ui) {
+  width: $imageWidth;
 }
 
-.ui.items .item:nth-of-type(6n+1):hover {
-  border-bottom-color: #6ECFF5 !important;
+
+/* Tablet Only */
+@media only screen and (min-width: $tabletBreakpoint) and (max-width: $largestTabletScreen) {
+  .ui.items > .item {
+    margin: $tabletItemSpacing 0em;
+  }
+  .ui.items > .item > .image:not(.ui) {
+    width: $tabletImageWidth;
+  }
+  .ui.items > .item > .image + .content {
+    display: block;
+    padding: 0em 0em 0em $tabletContentImageDistance;
+  }
+
 }
-.ui.items .item:nth-of-type(6n+2):hover {
-  border-bottom-color: #5C6166 !important;
-}
-.ui.items .item:nth-of-type(6n+3):hover {
-  border-bottom-color: #A1CF64 !important;
-}
-.ui.items .item:nth-of-type(6n+4):hover {
-  border-bottom-color: #D95C5C !important;
-}
-.ui.items .item:nth-of-type(6n+5):hover {
-  border-bottom-color: #00B5AD !important;
-}
-.ui.items .item:nth-of-type(6n+6):hover {
-  border-bottom-color: #564F8A !important;
+
+/* Mobily Only */
+@media only screen and (max-width: $largestMobileScreen) {
+  .ui.items > .item {
+    margin: $mobileItemSpacing 0em;
+  }
+  .ui.items > .item > .image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .ui.items > .item > .image,
+  .ui.items > .item > .image > img {
+    max-width: 100% !important;
+    width: $mobileImageWidth !important;
+    max-height: $mobileImageMaxHeight !important;
+  }
+  .ui.items > .item > .image + .content {
+    display: block;
+    padding: $mobileContentImageDistance 0em 0em;
+  }
+
 }
 
 
@@ -275,356 +386,84 @@
 *******************************/
 
 
-/*--------------
-    Connected
----------------*/
-
-.ui.connected.items {
-  display: table;
-  width: 100%;
-  margin-left: 0em !important;
-  margin-right: 0em !important;
-}
-.ui.connected.items > .row > .item,
-.ui.connected.items > .item {
-  float: none;
-  display: table-cell;
-  vertical-align: top;
-  height: auto;
-  border-radius: 0px;
-  margin: 0em;
-  width: 33.33%;
-}
-.ui.connected.items > .row {
-  display: table;
-  margin: 0.5em 0em;
-}
-.ui.connected.items > .row:first-child {
-  margin-top: 0em;
-}
-
-/* Borders */
-.ui.connected.items > .item,
-.ui.connected.items > .row:last-child > .item {
-  border-bottom: 0.2em solid rgba(0, 0, 0, 0.2);
-}
-.ui.connected.items > .row:last-child > .item:first-child,
-.ui.connected.items > .item:first-child {
-  border-radius: 0em 0em 0em 0.33em;
-}
-.ui.connected.items > .row:last-child > .item:last-child,
-.ui.connected.items > .item:last-child {
-  border-radius: 0em 0em 0.33em 0em;
-}
-
-
-/* Hover */
-.ui.connected.items .item:hover {
-  border-bottom-width: 0.2em;
-}
-
-
-/* Item Count */
-.ui.one.connected.items > .row > .item,
-.ui.one.connected.items > .item {
-  width: 50%;
-  padding-left: 2%;
-  padding-right: 2%;
-}
-.ui.two.connected.items > .row > .item,
-.ui.two.connected.items > .item {
-  width: 50%;
-  padding-left: 1%;
-  padding-right: 1%;
-}
-.ui.three.connected.items > .row > .item,
-.ui.three.connected.items > .item {
-  width: 33.333%;
-  padding-left: 1%;
-  padding-right: 1%;
-}
-.ui.four.connected.items > .row > .item,
-.ui.four.connected.items > .item {
-  width: 25%;
-  padding-left: 0.5%;
-  padding-right: 0.5%;
-}
-.ui.five.connected.items > .row > .item,
-.ui.five.connected.items > .item {
-  width: 20%;
-  padding-left: 0.5%;
-  padding-right: 0.5%;
-}
-.ui.six.connected.items > .row > .item,
-.ui.six.connected.items > .item {
-  width: 16.66%;
-  padding-left: 0.5%;
-  padding-right: 0.5%;
-}
-.ui.seven.connected.items > .row > .item,
-.ui.seven.connected.items > .item {
-  width: 14.28%;
-  padding-left: 0.5%;
-  padding-right: 0.5%;
-}
-.ui.eight.connected.items > .row > .item,
-.ui.eight.connected.items > .item {
-  width: 12.5%;
-  padding-left: 0.25%;
-  padding-right: 0.25%;
-}
-.ui.nine.connected.items > .row > .item,
-.ui.nine.connected.items > .item {
-  width: 11.11%;
-  padding-left: 0.25%;
-  padding-right: 0.25%;
-}
-.ui.ten.connected.items > .row > .item,
-.ui.ten.connected.items > .item {
-  width: 10%;
-  padding-left: 0.2%;
-  padding-right: 0.2%;
-}
-.ui.eleven.connected.items > .row > .item,
-.ui.eleven.connected.items > .item {
-  width: 9.09%;
-  padding-left: 0.2%;
-  padding-right: 0.2%;
-}
-.ui.twelve.connected.items > .row > .item,
-.ui.twelve.connected.items > .item {
-  width: 8.3333%;
-  padding-left: 0.1%;
-  padding-right: 0.1%;
-}
-
 /*-------------------
-      Responsive
+       Aligned
 --------------------*/
 
-@media only screen and (max-width : 768px) {
-  .ui.stackable.items {
-    display: block !important;
-  }
-  .ui.stackable.items > .item,
-  .ui.stackable.items > .row > .item {
-    display: block !important;
-    height: auto !important;
-    width: 100% !important;
-    padding: 0% !important;
-  }
-}
-
-/*--------------------
-      Horizontal
----------------------*/
-.ui.horizontal.items > .item,
-.ui.items > .horizontal.item {
-  display: table;
-}
-
-.ui.horizontal.items > .item > .image,
-.ui.items > .horizontal.item > .image {
-  display: table-cell;
-  width: 50%;
-}
-.ui.horizontal.items > .item > .image + .content,
-.ui.items > .horizontal.item > .image + .content {
-  width: 50%;
-  display: table-cell;
-}
-.ui.horizontal.items > .item > .content,
-.ui.items > .horizontal.item > .content {
-  padding: 1% 1.7% 11% 3%;
+.ui.items > .item > .image + [class*="top aligned"].content {
   vertical-align: top;
 }
-
-.ui.horizontal.items > .item > .meta,
-.ui.items > .horizontal.item > .meta {
-  position: absolute;
-  padding: 0%;
-  bottom: 7%;
-  left: 3%;
-  width: 94%;
+.ui.items > .item > .image + [class*="middle aligned"].content {
+  vertical-align: middle;
 }
-.ui.horizontal.items > .item > .image + .content + .meta,
-.ui.items > .horizontal.item > .image + .content + .meta {
-  bottom: 7%;
-  left: 53%;
-  width: 44%;
+.ui.items > .item > .image + [class*="bottom aligned"].content {
+  vertical-align: bottom;
 }
 
-
-.ui.horizontal.items > .item .avatar,
-.ui.items > .horizontal.item .avatar {
-  width: 11.5%;
-}
-
-.ui.items > .item .avatar {
-  max-width: 25px;
-}
 
 /*--------------
-    Item Count
+     Relaxed
 ---------------*/
 
-
-.ui.one.items {
-  margin-left: -2%;
-  margin-right: -2%;
+.ui.relaxed.items > .item {
+  margin: $relaxedItemSpacing 0em;
 }
-.ui.one.items > .item {
-  width: 100%;
-  margin-left: 2%;
-  margin-right: 2%;
+.ui[class*="very relaxed"].items > .item {
+  margin: $veryRelaxedItemSpacing 0em;
 }
 
-.ui.two.items {
-  margin-left: -1%;
-  margin-right: -1%;
+
+/*-------------------
+      Divided
+--------------------*/
+
+.ui.divided.items > .item {
+  border-top: $dividedBorder;
+  margin: $dividedMargin;
+  padding: $dividedPadding;
 }
-.ui.two.items > .item {
-  width: 48%;
-  margin-left: 1%;
-  margin-right: 1%;
+.ui.divided.items > .item:first-child {
+  border-top: none;
+  margin-top: $dividedFirstLastMargin !important;
+  padding-top: $dividedFirstLastPadding !important;
 }
-.ui.two.items > .item:nth-child(2n+1) {
-  clear: left;
+.ui.divided.items > .item:last-child {
+  margin-bottom: $dividedFirstLastMargin !important;
+  padding-bottom: $dividedFirstLastPadding !important;
 }
 
-.ui.three.items {
-  margin-left: -1%;
-  margin-right: -1%;
+/* Relaxed Divided */
+.ui.relaxed.divided.items > .item {
+  margin: 0em;
+  padding: $relaxedItemSpacing 0em;
 }
-.ui.three.items > .item {
-  width: 31.333%;
-  margin-left: 1%;
-  margin-right: 1%;
-}
-.ui.three.items > .item:nth-child(3n+1) {
-  clear: left;
+.ui[class*="very relaxed"].divided.items > .item {
+  margin: 0em;
+  padding: $veryRelaxedItemSpacing 0em;
 }
 
-.ui.four.items {
-  margin-left: -0.5%;
-  margin-right: -0.5%;
-}
-.ui.four.items > .item {
-  width: 24%;
-  margin-left: 0.5%;
-  margin-right: 0.5%;
-}
-.ui.four.items > .item:nth-child(4n+1) {
-  clear: left;
+
+/*-------------------
+        Link
+--------------------*/
+
+.ui.items a.item:hover,
+.ui.link.items > .item:hover {
+  cursor: pointer;
 }
 
-.ui.five.items {
-  margin-left: -0.5%;
-  margin-right: -0.5%;
-}
-.ui.five.items > .item {
-  width: 19%;
-  margin-left: 0.5%;
-  margin-right: 0.5%;
-}
-.ui.five.items > .item:nth-child(5n+1) {
-  clear: left;
+.ui.items a.item:hover .content .header,
+.ui.link.items > .item:hover .content .header {
+  color: $headerLinkHoverColor;
 }
 
-.ui.six.items {
-  margin-left: -0.5%;
-  margin-right: -0.5%;
-}
-.ui.six.items > .item {
-  width: 15.66%;
-  margin-left: 0.5%;
-  margin-right: 0.5%;
-}
-.ui.six.items > .item:nth-child(6n+1) {
-  clear: left;
+
+/*--------------
+      Size
+---------------*/
+
+.ui.items > .item {
+  font-size: $medium;
 }
 
-.ui.seven.items {
-  margin-left: -0.5%;
-  margin-right: -0.5%;
-}
-.ui.seven.items > .item {
-  width: 13.28%;
-  margin-left: 0.5%;
-  margin-right: 0.5%;
-  font-size: 11px;
-}
-.ui.seven.items > .item:nth-child(7n+1) {
-  clear: left;
-}
-
-.ui.eight.items {
-  margin-left: -0.25%;
-  margin-right: -0.25%;
-}
-.ui.eight.items > .item {
-  width: 12.0%;
-  margin-left: 0.25%;
-  margin-right: 0.25%;
-  font-size: 11px;
-}
-.ui.eight.items > .item:nth-child(8n+1) {
-  clear: left;
-}
-
-.ui.nine.items {
-  margin-left: -0.25%;
-  margin-right: -0.25%;
-}
-.ui.nine.items > .item {
-  width: 10.61%;
-  margin-left: 0.25%;
-  margin-right: 0.25%;
-  font-size: 10px;
-}
-.ui.nine.items > .item:nth-child(9n+1) {
-  clear: left;
-}
-
-.ui.ten.items {
-  margin-left: -0.2%;
-  margin-right: -0.2%;
-}
-.ui.ten.items > .item {
-  width: 9.6%;
-  margin-left: 0.2%;
-  margin-right: 0.2%;
-  font-size: 10px;
-}
-.ui.ten.items > .item:nth-child(10n+1) {
-  clear: left;
-}
-
-.ui.eleven.items {
-  margin-left: -0.2%;
-  margin-right: -0.2%;
-}
-.ui.eleven.items > .item {
-  width: 8.69%;
-  margin-left: 0.2%;
-  margin-right: 0.2%;
-  font-size: 9px;
-}
-.ui.eleven.items > .item:nth-child(11n+1) {
-  clear: left;
-}
-
-.ui.twelve.items {
-  margin-left: -0.1%;
-  margin-right: -0.1%;
-}
-.ui.twelve.items > .item {
-  width: 8.1333%;
-  margin-left: 0.1%;
-  margin-right: 0.1%;
-  font-size: 9px;
-}
-.ui.twelve.items > .item:nth-child(12n+1) {
-  clear: left;
-}
-
+@extend .loadUIOverrides;

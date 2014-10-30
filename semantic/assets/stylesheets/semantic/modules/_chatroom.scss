@@ -1,13 +1,22 @@
 /*
  * # Semantic - Chat Room
- * http://github.com/jlukic/semantic-ui/
+ * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2014 Contributors
+ * Copyright 2014 Contributor
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
+
+/*******************************
+            Theme
+*******************************/
+
+$type    : 'module';
+$element : 'chatroom';
+
+$import '../../theme.config';
 
 /*******************************
            Chat Room
@@ -38,6 +47,7 @@
 	background-color: #EEEEEE;
 	padding: 4px;
 	border: 1px solid rgba(0, 0, 0, 0.1);
+
 	border-radius: 5px 5px 0px 0px;
 }
 .ui.chatroom .actions .button {
@@ -99,8 +109,6 @@
 }
 .ui.chatroom .log .author {
 	font-weight: bold;
-	-webkit-transition: color 0.3s ease-out;
-	-moz-transition: color 0.3s ease-out;
 	transition: color 0.3s ease-out;
 }
 .ui.chatroom .log a.author:hover {
@@ -219,9 +227,7 @@
 	font-size: 12px;
 	line-height: 23px;
 
-	-webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
-
 	border-radius: 0 5px 5px 0;
 }
 .ui.chatroom .talk .log-in.button {
@@ -270,3 +276,5 @@
 .ui.chatroom .talk {
 	height: 40px;
 }
+
+@extend .loadUIOverrides;
