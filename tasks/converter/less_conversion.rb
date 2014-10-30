@@ -155,7 +155,7 @@ class Converter
       #The code below goes into folders this order: master->build->less
       get_paths_by_type('collections', /\.less$/, get_tree(get_tree_sha('collections', src_folder ))).map { |f| "collections/#{f}" } +
       get_paths_by_type('behaviors', /\.less$/, get_tree(get_tree_sha('behaviors', src_folder ))).map { |f| "collections/#{f}" } +
-      get_paths_by_type('global', /\.less$/, get_tree(get_tree_sha('global', src_folder ))).map { |f| "collections/#{f}" } +
+      get_paths_by_type('globals', /\.less$/, get_tree(get_tree_sha('globals', src_folder ))).map { |f| "globals/#{f}" } +
       get_paths_by_type('elements', /\.less$/, get_tree(get_tree_sha('elements', src_folder ))).map { |f| "elements/#{f}" } +
       get_paths_by_type('modules', /\.less$/, get_tree(get_tree_sha('modules', src_folder ))).map { |f| "modules/#{f}" } +
       get_paths_by_type('views', /\.less$/, get_tree(get_tree_sha('views', src_folder ))).map { |f| "views/#{f}" }
@@ -177,74 +177,9 @@ class Converter
       file   = deinterpolate_vararg_mixins(file)
       file   = replace_calculation_semantics(file)
       file   = replace_file_imports(file)
-<<<<<<< HEAD
-      file   = replace_vendor_prefixes(file)
-      #file   = remove_dupes(file)
       file
     end
 
-    def replace_vendor_prefixes file
-
-      special_css_properties(file)
-
-=begin
-      new_css = ''
-      file.each_line do |line|
-        match1 =  line.match(/(-webkit-.*?;)|(-khtml-.*?;)|(-ms-.*?;)|(-moz-.*?;)|(-o-.*?;)/).to_s
-        match2 = match1.sub!(/(-webkit-.*?)|(-khtml-.*?)|(-ms-.*?)|(-moz-.*?)|(-o-.*?)/, "@include ").to_s unless match1.nil?
-        property_val = match2.match(/(?<=\:)(.*?)(?=\;)/) unless match2.nil?
-        compass_style = match2.sub! /(:.*?;)/, "(#{property_val});" unless match2.nil?
-        if match1.nil? or compass_style.nil?
-          new_css = new_css+line
-        else
-          new_css = new_css+compass_style
-        end
-      end
-      new_css
-=end
-
-
-    end
-
-    def special_css_properties file
-      case file
-      when /(-webkit-.*?;)|(-khtml-.*?;)|(-ms-.*?;)|(-moz-.*?;)|(-o-.*?;)/m
-        arr = file.scan /(-webkit-.*?;)|(-khtml-.*?;)|(-ms-.*?;)|(-moz-.*?;)|(-o-.*?;)/m
-        arr.reject!(&:nil?)
-        arr = clean_array(arr)
-        property = extract_compass_property(arr)
-        file.gsub!(/(-webkit-.*?;)|(-khtml-.*?;)|(-ms-.*?;)|(-moz-.*?;)|(-o-.*?;)/m, property)
-      end
-      file
-    end
-
-    def clean_array arr
-      arr.each do |k|
-        k.reject!(&:nil?)
-      end
-      arr
-    end
-
-    def extract_compass_property arr
-      first_property_name = arr.first.first unless arr.first.nil?
-      unless first_property_name.nil?
-        first_property_name.sub!(/(-webkit-.*?)|(-khtml-.*?)|(-ms-.*?)|(-moz-.*?)|(-o-.*?)/, "@include ").delete(' ')
-        first_property_value = first_property_name.match(/(?<=\:)(.*?)(?=\;)/)[0].lstrip unless first_property_name.match(/(?<=\:)(.*?)(?=\;)/).nil?
-        first_property_name.sub! /(:.*?;)/, "(#{first_property_value});"
-      end
-      first_property_name
-    end
-
-    def remove_dupes file
-      #http://sass-lang.com/documentation/Sass/Engine.html
-      #https://coderwall.com/p/fbawrq
-    end
-
-=======
-      file
-    end
-
->>>>>>> 2ad038c137d6a37b0841dceb2ba2756a0bd3991f
     def sass_fn_exists(fn)
       %Q{(#{fn}("") != unquote('#{fn}("")'))}
     end
