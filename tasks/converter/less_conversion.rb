@@ -154,6 +154,8 @@ class Converter
     def scan_less_folders
       #The code below goes into folders this order: master->build->less
       get_paths_by_type('collections', /\.less$/, get_tree(get_tree_sha('collections', src_folder ))).map { |f| "collections/#{f}" } +
+      get_paths_by_type('behaviors', /\.less$/, get_tree(get_tree_sha('behaviors', src_folder ))).map { |f| "collections/#{f}" } +
+      get_paths_by_type('global', /\.less$/, get_tree(get_tree_sha('global', src_folder ))).map { |f| "collections/#{f}" } +
       get_paths_by_type('elements', /\.less$/, get_tree(get_tree_sha('elements', src_folder ))).map { |f| "elements/#{f}" } +
       get_paths_by_type('modules', /\.less$/, get_tree(get_tree_sha('modules', src_folder ))).map { |f| "modules/#{f}" } +
       get_paths_by_type('views', /\.less$/, get_tree(get_tree_sha('views', src_folder ))).map { |f| "views/#{f}" }
