@@ -35,10 +35,10 @@ class Converter
   include JsConversion
   include FontsConversion
 
-  def initialize(repo: 'Semantic-Org/Semantic-UI', branch: 'master', save_to: {}, cache_path: 'tmp/converter-semantic')
+  def initialize(repo: 'Semantic-Org/Semantic-UI', branch: '1.0', save_to: {}, cache_path: 'tmp/converter-semantic')
     @logger     = Logger.new
     @repo       = repo
-    @branch     = branch || 'master'
+    @branch     = branch || '1.0'
     @branch_sha = get_branch_sha
     @cache_path = cache_path
     @repo_url   = "https://github.com/#@repo"
@@ -56,7 +56,7 @@ class Converter
     puts " repo   : #@repo_url"
     puts " branch : #@branch_sha #@repo_url/tree/#@branch"
     puts " save to: #{@save_to.to_json}"
-    puts " twbs cache: #{@cache_path}"
+    puts " converter cache: #{@cache_path}"
     puts '-' * 60
 
     @save_to.each { |_, v| FileUtils.mkdir_p(v) }

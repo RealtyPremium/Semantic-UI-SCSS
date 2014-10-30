@@ -51,7 +51,7 @@ class Converter
 
     def process_stylesheet_assets
       log_status 'Processing stylesheets...'
-      files = read_files('build/less', semantic_less_files)
+      files = read_files('src/definitions', semantic_less_files)
       save_to = @save_to[:scss]
 
 
@@ -147,20 +147,20 @@ class Converter
       @semantic_less_files ||= scan_less_folders
     end
 
+    def src_folder
+      folder = get_tree(get_tree_sha('definitions', get_tree(get_tree_sha('src'))))
+    end
+
     def scan_less_folders
       #The code below goes into folders this order: master->build->less
-      #get_tree(get_tree_sha('collections', get_tree(get_tree_sha('less', get_tree(get_tree_sha('build'))))))
-
-      get_paths_by_type('collections', /\.less$/,
-        get_tree(get_tree_sha('collections', get_tree(get_tree_sha('less', get_tree(get_tree_sha('build'))))))).map { |f| "collections/#{f}" } +
-      get_paths_by_type('elements', /\.less$/,
-        get_tree(get_tree_sha('elements', get_tree(get_tree_sha('less', get_tree(get_tree_sha('build'))))))).map { |f| "elements/#{f}" } +
-      get_paths_by_type('modules', /\.less$/,
-        get_tree(get_tree_sha('modules', get_tree(get_tree_sha('less', get_tree(get_tree_sha('build'))))))).map { |f| "modules/#{f}" } +
-      get_paths_by_type('views', /\.less$/,
-        get_tree(get_tree_sha('views', get_tree(get_tree_sha('less', get_tree(get_tree_sha('build'))))))).map { |f| "views/#{f}" }
-
+      get_paths_by_type('collections', /\.less$/, get_tree(get_tree_sha('collections', src_folder ))).map { |f| "collections/#{f}" } +
+      get_paths_by_type('behaviors', /\.less$/, get_tree(get_tree_sha('behaviors', src_folder ))).map { |f| "collections/#{f}" } +
+      get_paths_by_type('global', /\.less$/, get_tree(get_tree_sha('global', src_folder ))).map { |f| "collections/#{f}" } +
+      get_paths_by_type('elements', /\.less$/, get_tree(get_tree_sha('elements', src_folder ))).map { |f| "elements/#{f}" } +
+      get_paths_by_type('modules', /\.less$/, get_tree(get_tree_sha('modules', src_folder ))).map { |f| "modules/#{f}" } +
+      get_paths_by_type('views', /\.less$/, get_tree(get_tree_sha('views', src_folder ))).map { |f| "views/#{f}" }
     end
+
 
     # apply general less to scss conversion
     def convert_to_scss(file)
@@ -177,6 +177,7 @@ class Converter
       file   = deinterpolate_vararg_mixins(file)
       file   = replace_calculation_semantics(file)
       file   = replace_file_imports(file)
+<<<<<<< HEAD
       file   = replace_vendor_prefixes(file)
       #file   = remove_dupes(file)
       file
@@ -239,6 +240,11 @@ class Converter
       #https://coderwall.com/p/fbawrq
     end
 
+=======
+      file
+    end
+
+>>>>>>> 2ad038c137d6a37b0841dceb2ba2756a0bd3991f
     def sass_fn_exists(fn)
       %Q{(#{fn}("") != unquote('#{fn}("")'))}
     end
