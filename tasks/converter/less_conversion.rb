@@ -51,7 +51,7 @@ class Converter
 
     def process_stylesheet_assets
       log_status 'Processing stylesheets...'
-      files = read_files('build/less', semantic_less_files)
+      files = read_files('src/definitions', semantic_less_files)
       save_to = @save_to[:scss]
 
 
@@ -148,7 +148,7 @@ class Converter
     end
 
     def src_folder
-      get_tree(get_tree_sha('src', get_tree(get_tree_sha('definitions'))))
+      folder = get_tree(get_tree_sha('definitions', get_tree(get_tree_sha('src'))))
     end
 
     def scan_less_folders
@@ -157,7 +157,6 @@ class Converter
       get_paths_by_type('elements', /\.less$/, get_tree(get_tree_sha('elements', src_folder ))).map { |f| "elements/#{f}" } +
       get_paths_by_type('modules', /\.less$/, get_tree(get_tree_sha('modules', src_folder ))).map { |f| "modules/#{f}" } +
       get_paths_by_type('views', /\.less$/, get_tree(get_tree_sha('views', src_folder ))).map { |f| "views/#{f}" }
-
     end
 
 

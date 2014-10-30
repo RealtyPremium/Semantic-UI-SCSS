@@ -43,6 +43,9 @@ class Converter
 
 
     def get_file(url)
+      url = URI.parse(URI.encode(url.strip))
+      #log url
+      #exit
       cache_path = "./#@cache_path#{URI(url).path}"
       FileUtils.mkdir_p File.dirname(cache_path)
       if File.exists?(cache_path)
@@ -61,7 +64,8 @@ class Converter
       return @branch if @branch =~ /\A[0-9a-f]+\z/
       cmd = "git ls-remote 'https://github.com/#@repo' | awk '/#@branch/ {print $1}'"
       log cmd
-      @branch_sha ||= %x[#{cmd}].chomp
+      #lines.first required for 1.0 branch
+      @branch_sha ||= %x[#{cmd}].lines.first.chomp
       raise 'Could not get branch sha!' unless $?.success?
       @branch_sha
     end

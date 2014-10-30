@@ -1,13 +1,22 @@
 /*
  * # Semantic - Menu
- * http://github.com/jlukic/semantic-ui/
+ * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2014 Contributors
+ * Copyright 2014 Contributor
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
+
+/*******************************
+            Theme
+*******************************/
+
+$type    : 'collection';
+$element : 'menu';
+
+$import '../../theme.config';
 
 /*******************************
             Standard
@@ -18,16 +27,22 @@
 ---------------*/
 
 .ui.menu {
-  margin: 1rem 0rem;
-  background-color: #FFFFFF;
-
+  margin: $margin;
+  background: $background;
   font-size: 0px;
-  font-weight: normal;
-
-  -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 0.1875rem;
+  font-weight: $fontWeight;
+  box-shadow: $boxShadow;
+  border-radius: $borderRadius;
 }
+
+.ui.menu:after {
+  content: '';
+  display: block;
+  height: 0px;
+  clear: both;
+  visibility: hidden;
+}
+
 .ui.menu:first-child {
   margin-top: 0rem;
 }
@@ -35,91 +50,24 @@
   margin-bottom: 0rem;
 }
 
-
-.ui.menu:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-
-
-.ui.menu > .item:first-child {
-  border-radius: 0.1875em 0px 0px 0.1875em;
-}
-.ui.menu > .item:last-child {
-  border-radius: 0px 0.1875em 0.1875em 0px;
-}
-.ui.menu .item {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-
-  vertical-align: middle;
-
-  line-height: 1;
-  text-decoration: none;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-
-  -webkit-transition:
-    opacity 0.2s ease,
-    background 0.2s ease,
-    -webkit-box-shadow 0.2s ease;
-  -moz-transition:
-    opacity 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease
-  ;
-  transition:
-    opacity 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease
-  ;
-}
-
 /*--------------
-    Colors
+     Colors
 ---------------*/
 
 /* Text Color */
-.ui.menu .item,
-.ui.menu .item > a:not(.button) {
-  color: rgba(0, 0, 0, 0.75);
+.ui.menu .item {
+  color: $menuTextColor;
 }
-.ui.menu .item .item,
-.ui.menu .item .item > a:not(.button) {
-  color: rgba(30, 30, 30, 0.7);
+.ui.menu .item .item {
+  color: $subMenuTextColor;
 }
-.ui.menu .item .item .item,
-.ui.menu .item .item .item > a:not(.button) {
-  color: rgba(30, 30, 30, 0.6);
-}
-.ui.menu .dropdown .menu .item,
-.ui.menu .dropdown .menu .item a:not(.button) {
-  color: rgba(0, 0, 0, 0.75);
-}
+
 /* Hover */
 .ui.menu .item .menu a.item:hover,
 .ui.menu .item .menu .link.item:hover {
-  color: rgba(0, 0, 0, 0.85);
+  color: $darkTextColor;
 }
-.ui.menu .dropdown .menu .item a:not(.button):hover {
-  color: rgba(0, 0, 0, 0.85);
-}
-/* Active */
-.ui.menu .active.item,
-.ui.menu .active.item a:not(.button) {
-  color: rgba(0, 0, 0, 0.85);
-  border-radius: 0px;
-}
+
 
 /*--------------
       Items
@@ -128,29 +76,34 @@
 .ui.menu .item {
   position: relative;
   display: inline-block;
+  padding: $verticalPadding $horizontalPadding;
+  border-top: $borderSize solid transparent;
 
-  padding: 0.83em 0.95em;
+  background: $itemBackground;
+  vertical-align: middle;
+  line-height: 1;
+  text-decoration: none;
+  box-sizing: border-box;
 
-  border-top: 0em solid rgba(0, 0, 0, 0);
-
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: $transition;
 }
 
 .ui.menu .menu {
   margin: 0em;
 }
 
-.ui.menu .item.left,
-.ui.menu .menu.left {
+/* Floated Content */
+.ui.menu > .item:first-child {
+  border-radius: $borderRadius 0px 0px $borderRadius;
+}
+.ui.menu:not(.vertical) .item.left,
+.ui.menu:not(.vertical) .menu.left {
   float: left;
 }
-.ui.menu .item.right,
-.ui.menu .menu.right {
+.ui.menu:not(.vertical) .item.right,
+.ui.menu:not(.vertical) .menu.right {
   float: right;
 }
 
@@ -163,21 +116,12 @@
   position: absolute;
   content: '';
   top: 0%;
-  left: 0px;
-  width: 1px;
+  right: 0px;
+  width: $dividerSize;
   height: 100%;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.05)), color-stop(50%, rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.05)));
-  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.05) 100%);
-  background-image: -moz-linear-gradient(rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.05) 100%);
-  background-image: linear-gradient(
-    rgba(0, 0, 0, 0.05) 0%,
-    rgba(0, 0, 0, 0.1) 50%,
-    rgba(0, 0, 0, 0.05) 100%)
-  ;
+  background: $dividerBackground;
 }
-/*rtl:ignore*/
-.ui.menu > .menu:not(.right):first-child > .item:first-child:before,
-.ui.menu .item:first-child:before {
+.ui.menu > .right.menu:first-child {
   display: none;
 }
 .ui.menu .menu.right .item:before,
@@ -191,22 +135,33 @@
 ---------------*/
 
 .ui.menu .text.item > *,
+.ui.menu .item > a:not(.ui),
 .ui.menu .item > p:only-child {
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
   user-select: text;
-
-  line-height: 1.3;
-  color: rgba(0, 0, 0, 0.6);
+  line-height: $textLineHeight;
+  color: $textColor;
 }
 .ui.menu .item > p:first-child {
-  margin-top: 0px;
+  margin-top: 0;
 }
 .ui.menu .item > p:last-child {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
+/*--------------
+      Icons
+---------------*/
+
+.ui.menu .item > i.icon {
+  opacity: $iconOpacity;
+  float: $iconFloat;
+  margin: $iconMargin;
+}
+
+.ui.menu .item > i.dropdown.icon {
+  float: $dropdownIconFloat;
+  margin-left: $dropdownIconDistance;
+}
 
 /*--------------
      Button
@@ -214,13 +169,11 @@
 
 .ui.menu:not(.vertical) .item > .button {
   position: relative;
-  top: -0.05em;
-
-  margin: -0.55em 0;
-  padding-bottom: 0.55em;
-  padding-top: 0.55em;
-
-  font-size: 0.875em;
+  top: $buttonOffset;
+  margin: (-$buttonVerticalPadding) (0);
+  padding-bottom: $buttonVerticalPadding;
+  padding-top: $buttonVerticalPadding;
+  font-size: $buttonSize;
 }
 
 
@@ -228,48 +181,42 @@
      Inputs
 ---------------*/
 
-.ui.menu:not(.vertical) .item > .input {
-  margin-top: -0.85em;
-  margin-bottom: -0.85em;
-  padding-top: 0.3em;
-  padding-bottom: 0.3em;
+.ui.menu .item > .input {
   width: 100%;
-  vertical-align: top;
+}
+.ui.menu:not(.vertical) .item > .input {
+  position: relative;
+  top: $inputOffset;
+  margin: $inputVerticalMargin 0em;
 }
 .ui.menu .item > .input input {
-  padding-top: 0.35em;
-  padding-bottom: 0.35em;
-}
-.ui.vertical.menu .item > .input input {
-  margin: 0em;
-  padding-top: 0.63em;
-  padding-bottom: 0.63em;
+  font-size: $inputSize;
+  padding-top: $inputVerticalPadding;
+  padding-bottom: $inputVerticalPadding;
 }
 
 /* Action Input */
-.ui.menu:not(.vertical) .item > .button.labeled > .icon {
-  padding-top: 0.6em;
-}
 .ui.menu:not(.vertical) .item .action.input > .button {
-  font-size: 0.8em;
-  padding: 0.55em 0.8em;
+  font-size: $buttonSize;
+  padding: $buttonVerticalPadding $actionButtonHorizontalPadding;
 }
 
 /* Resizes */
-.ui.small.menu:not(.vertical) .item > .input input {
-  padding-top: 0.4em;
-  padding-bottom: 0.4em;
+.ui.small.menu .item > .input input {
+  top: $smallInputOffset;
+  padding-top: $smallInputVerticalPadding;
+  padding-bottom: $smallInputVerticalPadding;
 }
-.ui.large.menu:not(.vertical) .item > .input input {
-  top: -0.125em;
-  padding-bottom: 0.6em;
-  padding-top: 0.6em;
+.ui.large.menu .item > .input input {
+  top: $largeInputOffset;
+  padding-bottom: $largeInputVerticalPadding;
+  padding-top: $largeInputVerticalPadding;
 }
-.ui.large.menu:not(.vertical) .item .action.input > .button {
-  font-size: 0.8em;
+
+.ui.large.menu .item .action.input > .button {
   padding: 0.9em;
 }
-.ui.large.menu:not(.vertical) .item .action.input > .button > .icon {
+.ui.large.menu .item .action.input > .button > .icon {
   padding-top: 0.8em;
 }
 
@@ -277,12 +224,12 @@
      Header
 ---------------*/
 
-.ui.menu .header.item {
-  background-color: rgba(0, 0, 0, 0.04);
-  margin: 0em;
-}
+.ui.menu .header.item,
 .ui.vertical.menu .header.item {
-  font-weight: bold;
+  background: $headerBackground;
+  margin: 0em;
+  text-transform: $headerTextTransform;
+  font-weight: $headerWeight;
 }
 
 
@@ -290,59 +237,65 @@
     Dropdowns
 ---------------*/
 
-.ui.menu .dropdown .menu .item .icon {
-  float: none;
-  margin: 0em 0.75em 0em 0em;
+/* Dropdown */
+.ui.menu .ui.dropdown.visible {
+  background: $subtleTransparentBlack;
+  border-bottom-right-radius: 0em;
+  border-bottom-left-radius: 0em;
 }
+.ui.menu .ui.dropdown.active {
+  box-shadow: none;
+}
+
+/* Menu Position */
 .ui.menu .dropdown.item .menu {
-  left: 1px;
-  margin: 0px;
-  min-width: -webkit-calc(100% - 1px);
-  min-width: -moz-calc(100% - 1px);
-  min-width: calc(100% - 1px);
-  -webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+  background: $dropdownBackground;
+  left: 0px;
+  margin: $dropdownMenuOffset 0px 0px;
+  min-width: #{calc(100% - 1px)};
+  box-shadow: $dropdownBoxShadow;
+}
+.ui.menu:not(.secondary) .pointing.dropdown.item .menu {
+  margin-top: $dropdownPointingDistance;
+  border-top-left-radius: 0em;
+  border-top-right-radius: 0em;
+}
+.ui.menu .simple.dropdown.item .menu {
+  margin: 0px !important;
+}
+
+
+/* Secondary Menu Dropdown */
+.ui.secondary.menu > .menu > .active.dropdown.item {
+  background-color: transparent;
 }
 .ui.secondary.menu .dropdown.item .menu {
   left: 0px;
   min-width: 100%;
 }
-.ui.menu .pointing.dropdown.item .menu {
-  margin-top: 0.75em;
-}
-.ui.menu .simple.dropdown.item .menu {
-  margin: 0px !important;
-}
-.ui.menu .dropdown.item .menu .item {
-  width: 100%;
-  color: rgba(0, 0, 0, 0.75);
-}
-.ui.menu .dropdown.item .menu .active.item {
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
-}
-.ui.menu .ui.dropdown .menu .item:before {
-  display: none;
-}
 
+/* Even Width Menu Dropdown */
+.ui.item.menu .dropdown .menu .item {
+  width: 100%;
+}
 
 /*--------------
      Labels
 ---------------*/
 
 .ui.menu .item > .label {
-  background-color: rgba(0, 0, 0, 0.35);
-  color: #FFFFFF;
-  margin: -0.15em 0em -0.15em 0.5em;
-  padding: 0.3em 0.8em;
+  background: $labelBackground;
+  color: $labelTextColor;
+  margin: $labelOffset 0em $labelOffset $labelTextMargin;
+  padding: $labelVerticalPadding $labelHorizontalPadding;
   vertical-align: baseline;
 }
 .ui.menu .item > .floating.label {
-  padding: 0.3em 0.8em;
+  padding: $labelVerticalPadding $labelHorizontalPadding;
 }
 
 /*--------------
-      Images
+     Images
 ---------------*/
 
 .ui.menu .item > img:only-child {
@@ -350,6 +303,7 @@
   max-width: 100%;
   margin: 0em auto;
 }
+
 
 /*******************************
              States
@@ -359,35 +313,27 @@
       Hover
 ---------------*/
 
-.ui.link.menu .item:hover,
-.ui.menu .link.item:hover,
-.ui.menu a.item:hover,
-.ui.menu .ui.dropdown .menu .item:hover {
+.ui.link.menu > .item:hover,
+.ui.menu > .link.item:hover,
+.ui.menu > a.item:hover,
+.ui.link.menu .menu > .item:hover,
+.ui.menu .menu > .link.item:hover,
+.ui.menu .menu > a.item:hover {
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.02);
-}
-.ui.menu .ui.dropdown.item.active {
-  background-color: rgba(0, 0, 0, 0.02);
-
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  -moz-border-bottom-right-radius: 0em;
-  border-bottom-right-radius: 0em;
-  -moz-border-bottom-left-radius: 0em;
-  border-bottom-left-radius: 0em;
+  background: $hoverBackground;
+  color: $hoverColor;
 }
 
 
 /*--------------
-      Down
+     Pressed
 ---------------*/
 
 .ui.link.menu .item:active,
 .ui.menu .link.item:active,
-.ui.menu a.item:active,
-.ui.menu .ui.dropdown .menu .item:active {
-  background-color: rgba(0, 0, 0, 0.05);
-
+.ui.menu a.item:active {
+  background: $pressedBackground;
+  color: $pressedColor;
 }
 
 /*--------------
@@ -395,38 +341,46 @@
 ---------------*/
 
 .ui.menu .active.item  {
-  background-color: rgba(0, 0, 0, 0.01);
-  color: rgba(0, 0, 0, 0.95);
-
-  -webkit-box-shadow: 0em 0.2em 0em inset;
-  box-shadow: 0em 0.2em 0em inset;
+  background: $activeBackground;
+  color: $selectedTextColor;
+  font-weight: $activeFontWeight;
+  box-shadow: 0em $activeBorderSize 0em inset;
 }
+.ui.menu .active.item > i.icon {
+  opacity: $activeIconOpacity;
+}
+
+/* Vertical */
 .ui.vertical.menu .active.item {
+  background: $activeBackground;
   border-radius: 0em;
-  -webkit-box-shadow: 0.2em 0em 0em inset;
-  box-shadow: 0.2em 0em 0em inset;
+  box-shadow: $activeBorderSize 0em 0em inset;
 }
 .ui.vertical.menu > .active.item:first-child {
-  border-radius: 0em 0.1875em 0em 0em;
+  border-radius: 0em $borderRadius 0em 0em;
 }
 .ui.vertical.menu > .active.item:last-child {
-  border-radius: 0em 0em 0.1875em 0em;
+  border-radius: 0em 0em $borderRadius 0em;
 }
 .ui.vertical.menu > .active.item:only-child {
-  border-radius: 0em 0.1875em 0.1875em 0em;
+  border-radius: 0em $borderRadius $borderRadius 0em;
 }
-
-
 .ui.vertical.menu .active.item .menu .active.item {
   border-left: none;
 }
-.ui.vertical.menu .active.item .menu .active.item {
-  padding-left: 1.5rem;
-}
 .ui.vertical.menu .item .menu .active.item {
-  background-color: rgba(0, 0, 0, 0.03);
-  -webkit-box-shadow: none;
+  background-color: $subMenuActiveBackground;
   box-shadow: none;
+}
+
+
+/*--------------
+  Active Hover
+---------------*/
+
+.ui.vertical.menu .active.item:hover,
+.ui.menu .active.item:hover {
+  background-color: $activeHoverBackground;
 }
 
 /*--------------
@@ -436,13 +390,13 @@
 .ui.menu .item.disabled,
 .ui.menu .item.disabled:hover {
   cursor: default;
-  color: rgba(0, 0, 0, 0.2);
+  color: $disabledTextColor;
   background-color: transparent !important;
 }
 
 
 /*--------------------
-     Loading
+       Loading
 ---------------------*/
 
 /* On Form */
@@ -454,10 +408,9 @@
   top: 0%;
   left: 0%;
   content: '';
-
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.8) url(../images/loader-large.gif) no-repeat 50% 50%;
+  background: $loadingBackgroundColor url("#{$loadingImage}") no-repeat $loadingPosition;
   visibility: visible;
 }
 
@@ -470,33 +423,43 @@
     Vertical
 ---------------*/
 
+.ui.vertical.menu {
+  background: $verticalBackground;
+}
+
+/*--- Item ---*/
 .ui.vertical.menu .item {
+  background: $verticalItemBackground;
   display: block;
   height: auto !important;
   border-top: none;
-  border-left: 0em solid rgba(0, 0, 0, 0);
+  border-left: $borderSize solid transparent;
   border-right: none;
 }
 .ui.vertical.menu > .item:first-child {
-  border-radius: 0.1875em 0.1875em 0px 0px;
+  border-radius: $borderRadius $borderRadius 0px 0px;
 }
 .ui.vertical.menu > .item:last-child {
-  border-radius: 0px 0px 0.1875em 0.1875em;
+  border-radius: 0px 0px $borderRadius $borderRadius;
 }
 
+/*--- Label ---*/
 .ui.vertical.menu .item > .label {
   float: right;
   text-align: center;
 }
+
+/*--- Icon ---*/
 .ui.vertical.menu .item > i.icon {
-  float: right;
-  width: 1.22em;
-  margin: 0em 0em 0em 0.5em;
+  width: $iconWidth;
+  float: $verticalIconFloat;
+  margin: $verticalIconMargin;
 }
 .ui.vertical.menu .item > .label + i.icon {
-  float: none;
-  margin: 0em 0.25em 0em 0em;
+  float: $labelAndIconFloat;
+  margin: $labelAndIconMargin;
 }
+
 
 /*--- Border ---*/
 .ui.vertical.menu .item:before {
@@ -505,42 +468,26 @@
   top: 0%;
   left: 0px;
   width: 100%;
+  height: $dividerSize;
+  background: $verticalDividerBackground;
   height: 1px;
-  background-image: -webkit-linear-gradient(left,
-    rgba(0, 0, 0, 0.03) 0%,
-    rgba(0, 0, 0, 0.1) 1.5em,
-    rgba(0, 0, 0, 0.03) 100%)
-  ;
-  background-image: -moz-linear-gradient(left,
-    rgba(0, 0, 0, 0.03) 0%,
-    rgba(0, 0, 0, 0.1) 1.5em,
-    rgba(0, 0, 0, 0.03) 100%)
-  ;
-  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.03)), color-stop(1.5em, rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.03)));
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.1) 1.5em, rgba(0, 0, 0, 0.03) 100%);
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.1) 1.5em, rgba(0, 0, 0, 0.03) 100%);
-  background-image: linear-gradient(to right,
-    rgba(0, 0, 0, 0.03) 0%,
-    rgba(0, 0, 0, 0.1) 1.5em,
-    rgba(0, 0, 0, 0.03) 100%)
-  ;
 }
 
 .ui.vertical.menu .item:first-child:before {
-  background-image: none !important;
+  background: none !important;
 }
 
 /*--- Dropdown ---*/
-.ui.vertical.menu .dropdown.item > i {
+.ui.vertical.menu .dropdown.item > .icon {
   float: right;
   content: "\f0da";
+  margin-left: 1em;
 }
 .ui.vertical.menu .dropdown.item .menu {
   top: 0% !important;
   left: 100%;
-  margin: 0px 0px 0px 1px;
-  -webkit-box-shadow: 0 0px 1px 1px #DDDDDD;
-          box-shadow: 0 0px 1px 1px #DDDDDD;
+  margin: $dropdownMenuOffset 0px 0px $dropdownMenuOffset;
+  box-shadow: $dropdownVerticalBoxShadow;
 }
 .ui.vertical.menu .dropdown.item.active {
   border-top-right-radius: 0em;
@@ -553,17 +500,17 @@
   margin-right: 0em;
 }
 .ui.vertical.menu .dropdown.item.active {
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
 /*--- Sub Menu ---*/
-.ui.vertical.menu .item > .menu {
-  margin: 0.5em -0.95em 0em;
+.ui.vertical.menu .item:not(.dropdown) > .menu {
+  margin: ($subMenuMargin) (-$horizontalPadding) (0em);
 }
-.ui.vertical.menu .item > .menu > .item {
-  padding: 0.5rem 1.5rem;
-  font-size: 0.875em;
+.ui.vertical.menu .item:not(.dropdown) > .menu > .item {
+  background: none;
+  padding: $subMenuHorizontalPadding $subMenuVerticalPadding;
+  font-size: $subMenuFontSize;
 }
 .ui.vertical.menu .item > .menu > .item:before {
   display: none;
@@ -574,82 +521,85 @@
      Tiered
 ---------------*/
 
-.ui.tiered.menu > .sub.menu > .item {
-  color: rgba(0, 0, 0, 0.4);
-}
 .ui.tiered.menu > .menu > .item:hover {
-  color: rgba(0, 0, 0, 0.8);
+  color: $tieredSubMenuActiveColor;
 }
-.ui.tiered.menu .item.active {
-  color: rgba(0, 0, 0, 0.8);
+.ui.tiered.menu .active.item {
+  background: $tieredActiveItemBackground;
 }
 .ui.tiered.menu > .menu .item.active:after {
   position: absolute;
   content: '';
-  margin-top: -1px;
+  margin-top: -$dividerSize;
   top: 100%;
   left: 0px;
 
   width: 100%;
   height: 2px;
-  background-color: #FBFBFB;
+  background-color: $tieredActiveMenuBackground;
 }
+
+/* Sub Menu */
 .ui.tiered.menu .sub.menu {
-  background-color: rgba(0, 0, 0, 0.01);
+  background-color: $tieredActiveMenuBackground;
   border-radius: 0em;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-
-  -webkit-box-shadow: none;
+  border-top: 1px solid $borderColor;
   box-shadow: none;
+}
+.ui.tiered.menu > .sub.menu > .item {
+  color: $tieredSubMenuColor;
+  font-weight: $tieredSubMenuFontWeight;
+  text-transform: $tieredSubMenuTextTransform;
+  font-size: $subMenuFontSize;
+}
 
-  color: #FFFFFF;
-}
-.ui.tiered.menu .sub.menu .item {
-  font-size: 0.875rem;
-}
+/* Sub Menu Divider */
 .ui.tiered.menu .sub.menu .item:before {
-  background-image: none;
+  background: none;
 }
+
+/* Sub Menu Hover */
+.ui.tiered.menu .sub.menu .item:hover {
+  background: $tieredSubMenuHoverBackground;
+  color: $tieredSubMenuHoverColor;
+}
+
+/* Sub Menu Active */
 .ui.tiered.menu .sub.menu .active.item {
-  padding-top: 0.83em;
-  background-color: transparent;
-  border-radius: 0 0 0 0;
+  padding-top: $verticalPadding;
+  background: $tieredSubMenuActiveBackground;
+  border-radius: 0;
   border-top: medium none;
-
-  -webkit-box-shadow: none;
   box-shadow: none;
-
-  color: rgba(0, 0, 0, 0.7) !important;
+  color: $tieredSubMenuActiveColor !important;
 }
 .ui.tiered.menu .sub.menu .active.item:after {
   display: none;
 }
 
-/* Inverted */
+/* Inverted Tiered Menu */
 .ui.inverted.tiered.menu > .menu > .item {
-  color: rgba(255, 255, 255, 0.5);
+  color: $invertedUnselectedTextColor;
 }
 .ui.inverted.tiered.menu .sub.menu {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: $tieredInvertedSubMenuBackground;
 }
 .ui.inverted.tiered.menu .sub.menu .item {
-  color: rgba(255, 255, 255, 0.6);
+  color: $invertedLightTextColor;
 }
-
 .ui.inverted.tiered.menu > .menu > .item:hover {
-  color: rgba(255, 255, 255, 0.9);
+  color: $invertedHoveredTextColor;
 }
 .ui.inverted.tiered.menu .active.item:after {
   display: none;
 }
 .ui.inverted.tiered.menu > .sub.menu > .active.item,
 .ui.inverted.tiered.menu > .menu > .active.item {
-  color: rgba(255, 255, 255, 1) !important;
-  -webkit-box-shadow: none;
+  color: $invertedSelectedTextColor !important;
   box-shadow: none;
 }
 
-/* Tiered pointing */
+/* Tiered Pointing */
 .ui.pointing.tiered.menu > .menu > .item:after {
   display: none;
 }
@@ -664,23 +614,21 @@
 
 .ui.tabular.menu {
   background-color: transparent;
-  border-bottom: 1px solid #DCDDDE;
+  border-bottom: $tabularBorderWidth solid $tabularBorderColor;
 
   border-radius: 0em;
-
-  -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
 .ui.tabular.menu .item {
   background-color: transparent;
 
-  border-left: 1px solid transparent;
-  border-right: 1px solid transparent;
-  border-top: 1px solid transparent;
+  border-left: $tabularBorderWidth solid transparent;
+  border-right: $tabularBorderWidth solid transparent;
+  border-top: $tabularBorderWidth solid transparent;
 
-  padding-left: 1.4em;
-  padding-right: 1.4em;
-  color: rgba(0, 0, 0, 0.6);
+  padding-left: $tabularHorizontalPadding;
+  padding-right: $tabularHorizontalPadding;
+  color: $tabularMenuTextColor;
 }
 .ui.tabular.menu .item:before {
   display: none;
@@ -689,25 +637,24 @@
 /* Hover */
 .ui.tabular.menu .item:hover {
   background-color: transparent;
-  color: rgba(0, 0, 0, 0.8);
+  color: $hoveredTextColor;
 }
 
 /* Active */
 .ui.tabular.menu .active.item {
   position: relative;
 
-  background-color: #FFFFFF;
-  color: rgba(0, 0, 0, 0.8);
+  background-color: $tabularMenuActiveBackground;
+  color: $tabularActiveColor;
 
-  border-color: #DCDDDE;
-  font-weight: bold;
+  border-color: $tabularBorderColor;
+  font-weight: $tabularActiveWeight;
 
-  margin-bottom: -1px;
-  border-bottom: 1px solid #FFFFFF;
+  margin-bottom: -$tabularBorderWidth;
+  border-bottom: $tabularBorderWidth solid $tabularBackgroundColor;
 
-  -webkit-box-shadow: none;
   box-shadow: none;
-  border-radius: 5px 5px 0 0;
+  border-radius: $tabularBorderRadius $tabularBorderRadius 0px 0px;
 }
 
 /* Coupling with segment for attachment */
@@ -716,8 +663,9 @@
   z-index: 2;
 }
 .ui.tabular.menu ~ .bottom.attached.segment {
-  margin: 1px 0px 0px 1px;
+  margin: -1px 0px 0px;
 }
+
 
 
 /*--------------
@@ -731,7 +679,7 @@
 }
 
 .ui.pagination.menu .item {
-  min-width: 3em;
+  min-width: $paginationMinWidth;
   text-align: center;
 }
 .ui.pagination.menu .icon.item i.icon {
@@ -741,12 +689,11 @@
   display: block;
 }
 
-/* active */
+/* Active */
 .ui.pagination.menu .active.item {
   border-top: none;
-  padding-top: 0.83em;
-  background-color: rgba(0, 0, 0, 0.05);
-  -webkit-box-shadow: none;
+  padding-top: $verticalPadding;
+  background-color: $paginationActiveBackground;
   box-shadow: none;
 }
 
@@ -755,23 +702,22 @@
 ---------------*/
 
 .ui.secondary.menu {
-  background-color: transparent;
-  border-radius: 0px;
-
-  -webkit-box-shadow: none;
+  background: $secondaryBackground;
+  border-radius: 0em;
   box-shadow: none;
 }
 .ui.secondary.menu > .menu > .item,
 .ui.secondary.menu > .item {
-  -webkit-box-shadow: none;
   box-shadow: none;
 
   border: none;
   height: auto !important;
+  background: $secondaryItemBackground;
 
-  margin: 0em 0.25em;
-  padding: 0.5em 1em;
-  border-radius: 0.3125em;
+  margin: 0em $secondaryMargin;
+  padding: $secondaryVerticalPadding $secondaryHorizontalPadding;
+
+  border-radius: $secondaryBorderRadius;
 }
 .ui.secondary.menu > .menu > .item:before,
 .ui.secondary.menu > .item:before {
@@ -782,186 +728,78 @@
   background-color: transparent;
   border: none;
 }
+
 .ui.secondary.menu .link.item,
 .ui.secondary.menu a.item {
-  opacity: 0.8;
-
-  -webkit-transition: none;
-  -moz-transition: none;
+  opacity: $secondaryLinkOpacity;
   transition: none;
 }
 .ui.secondary.menu .header.item {
-  border-right: 0.1em solid rgba(0, 0, 0, 0.1);
-  background-color: transparent;
+  border-right: $secondaryHeaderBorder;
+  background: $secondaryHeaderBackground;
   border-radius: 0em;
 }
 
-/* hover */
+/* Hover */
 .ui.secondary.menu .link.item:hover,
 .ui.secondary.menu a.item:hover {
   opacity: 1;
 }
 
-/* active */
+/* Active */
 .ui.secondary.menu > .menu > .active.item,
 .ui.secondary.menu > .active.item {
-  background-color: rgba(0, 0, 0, 0.08);
+  background: $secondaryActiveBackground;
   opacity: 1;
-
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
 .ui.secondary.vertical.menu > .active.item {
-  border-radius: 0.3125em;
+  border-radius: $secondaryBorderRadius;
 }
 
-/* inverted */
+/* Inverted */
 .ui.secondary.inverted.menu .link.item,
 .ui.secondary.inverted.menu a.item {
-  color: rgba(255, 255, 255, 0.5);
+  color: $secondaryInvertedColor;
 }
 .ui.secondary.inverted.menu .link.item:hover,
 .ui.secondary.inverted.menu a.item:hover {
-  color: rgba(255, 255, 255, 0.9);
+  color: $secondaryInvertedHoverColor;
 }
 .ui.secondary.inverted.menu .active.item {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: $secondaryInvertedActiveBackground;
 }
 
 
-/* disable variations */
+/* Disable variations */
 .ui.secondary.item.menu > .item {
   margin: 0em;
 }
 .ui.secondary.attached.menu {
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
-/*---------------------
-   Secondary Pointing
------------------------*/
-
-.ui.secondary.pointing.menu {
-  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-}
-
-.ui.secondary.pointing.menu > .menu > .item,
-.ui.secondary.pointing.menu > .item {
-  margin: 0em 0em -3px;
-  padding: 0.6em 0.95em;
-
-  border-bottom: 3px solid rgba(0, 0, 0, 0);
-  border-radius: 0em;
-
-  -webkit-transition:
-    color 0.2s
-  ;
-  -moz-transition:
-    color 0.2s
-  ;
-  transition:
-    color 0.2s
-  ;
-}
-
-/* Item Types */
-.ui.secondary.pointing.menu .header.item {
-  margin-bottom: -3px;
-  background-color: transparent !important;
-  border-right-width: 0px !important;
-  font-weight: bold !important;
-  color: rgba(0, 0, 0, 0.8) !important;
-}
-.ui.secondary.pointing.menu .text.item {
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
-}
-.ui.secondary.pointing.menu > .menu > .item:after,
-.ui.secondary.pointing.menu > .item:after {
-  display: none;
-}
-
-/* Hover */
-.ui.secondary.pointing.menu > .menu > .link.item:hover,
-.ui.secondary.pointing.menu > .link.item:hover,
-.ui.secondary.pointing.menu > .menu > a.item:hover,
-.ui.secondary.pointing.menu > a.item:hover {
-  background-color: transparent;
-  color: rgba(0, 0, 0, 0.7);
-}
-
-/* Down */
-.ui.secondary.pointing.menu > .menu > .link.item:active,
-.ui.secondary.pointing.menu > .link.item:active,
-.ui.secondary.pointing.menu > .menu > a.item:active,
-.ui.secondary.pointing.menu > a.item:active {
-  background-color: transparent;
-  border-color: rgba(0, 0, 0, 0.2);
-}
-
-/* Active */
-.ui.secondary.pointing.menu > .menu > .item.active,
-.ui.secondary.pointing.menu > .item.active {
-  background-color: transparent;
-  border-color: rgba(0, 0, 0, 0.4);
-
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
 
 /*---------------------
    Secondary Vertical
 -----------------------*/
 
-.ui.secondary.vertical.pointing.menu {
-  border: none;
-  border-right: 3px solid rgba(0, 0, 0, 0.1);
-}
 .ui.secondary.vertical.menu > .item {
   border: none;
-  margin: 0em 0em 0.3em;
-  padding: 0.6em 0.8em;
-  border-radius: 0.1875em;
+  margin: 0em 0em $secondaryVerticalMargin;
+  border-radius: $borderRadius;
 }
 .ui.secondary.vertical.menu > .header.item {
   border-radius: 0em;
 }
-.ui.secondary.vertical.pointing.menu > .item {
-  margin: 0em -3px 0em 0em;
-  border-bottom: none;
-  border-right: 3px solid transparent;
-  border-radius: 0em;
-}
-/* Hover */
-.ui.secondary.vertical.pointing.menu > .item:hover {
-  background-color: transparent;
-  color: rgba(0, 0, 0, 0.7);
-}
 
-/* Down */
-.ui.secondary.vertical.pointing.menu > .item:active {
-  background-color: transparent;
-  border-color: rgba(0, 0, 0, 0.2);
-}
-
-/* Active */
-.ui.secondary.vertical.pointing.menu > .item.active {
-  background-color: transparent;
-  border-color: rgba(0, 0, 0, 0.4);
-  color: rgba(0, 0, 0, 0.85);
-}
-
-/*--------------
-    Inverted
----------------*/
-
+/* Inverted */
 .ui.secondary.inverted.menu {
   background-color: transparent;
 }
 
 .ui.secondary.inverted.pointing.menu {
-  border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+  border-bottom: $secondaryPointingBorderWidth solid rgba(255, 255, 255, 0.1);
 }
 .ui.secondary.inverted.pointing.menu > .item {
   color: rgba(255, 255, 255, 0.7);
@@ -976,7 +814,7 @@
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* Down */
+/* Pressed */
 .ui.secondary.inverted.pointing.menu > .menu > .item:active,
 .ui.secondary.inverted.pointing.menu > .item:active {
   border-color: rgba(255, 255, 255, 0.4);
@@ -989,26 +827,115 @@
   color: rgba(255, 255, 255, 1);
 }
 
-/*---------------------
-   Inverted Vertical
-----------------------*/
 
+/*---------------------
+   Secondary Pointing
+-----------------------*/
+
+.ui.secondary.pointing.menu {
+  border-bottom: $secondaryPointingBorderWidth solid rgba(0, 0, 0, 0.1);
+}
+
+.ui.secondary.pointing.menu > .menu > .item,
+.ui.secondary.pointing.menu > .item {
+  margin: (0em) (0em) (-$secondaryPointingBorderWidth);
+  padding: $secondaryPointingVerticalPadding $secondaryPointingHorizontalPadding;
+  border-bottom: $secondaryPointingBorderWidth solid transparent;
+  border-radius: 0em;
+  transition: $secondaryTransition;
+}
+
+/* Item Types */
+.ui.secondary.pointing.menu .header.item {
+  margin-bottom: -$secondaryPointingBorderWidth;
+  background-color: transparent !important;
+  border-right-width: 0px !important;
+  font-weight: bold !important;
+  color: $secondaryPointingHeaderColor !important;
+}
+.ui.secondary.pointing.menu .text.item {
+  box-shadow: none !important;
+}
+.ui.secondary.pointing.menu > .menu > .item:after,
+.ui.secondary.pointing.menu > .item:after {
+  display: none;
+}
+
+/* Hover */
+.ui.secondary.pointing.menu > .menu > .link.item:hover,
+.ui.secondary.pointing.menu > .link.item:hover,
+.ui.secondary.pointing.menu > .menu > a.item:hover,
+.ui.secondary.pointing.menu > a.item:hover {
+  background-color: transparent;
+  color: $secondaryPointingHoverTextColor;
+}
+
+/* Pressed */
+.ui.secondary.pointing.menu > .menu > .link.item:active,
+.ui.secondary.pointing.menu > .link.item:active,
+.ui.secondary.pointing.menu > .menu > a.item:active,
+.ui.secondary.pointing.menu > a.item:active {
+  background-color: transparent;
+  border-color: $secondaryPointingBorderColor;
+}
+
+/* Active */
+.ui.secondary.pointing.menu > .menu > .item.active,
+.ui.secondary.pointing.menu > .item.active {
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.4);
+  box-shadow: none;
+  color: $secondaryPointingActiveTextColor;
+}
+
+/* Secondary Vertical Pointing */
+.ui.secondary.vertical.pointing.menu {
+  border: none;
+  border-right: $secondaryPointingBorderWidth solid rgba(0, 0, 0, 0.1);
+}
+.ui.secondary.vertical.pointing.menu > .item {
+  margin: (0em) (-$secondaryPointingBorderWidth) (0em) (0em);
+  border-bottom: none;
+  border-right: $secondaryPointingBorderWidth solid transparent;
+  border-radius: 0em;
+}
+
+/* Hover */
+.ui.secondary.vertical.pointing.menu > .item:hover {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* Pressed */
+.ui.secondary.vertical.pointing.menu > .item:active {
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Active */
+.ui.secondary.vertical.pointing.menu > .item.active {
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.85);
+}
+
+/* Inverted Vertical Pointing Secondary */
 .ui.secondary.inverted.vertical.pointing.menu {
-  border-right: 3px solid rgba(255, 255, 255, 0.1);
+  border-right: $secondaryPointingBorderWidth solid rgba(255, 255, 255, 0.1);
   border-bottom: none;
 }
+
 
 /*--------------
     Text Menu
 ---------------*/
 
 .ui.text.menu {
-  background-color: transparent;
+  background: none transparent;
 
   margin: 1rem -1rem;
   border-radius: 0px;
 
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
 .ui.text.menu > .item {
@@ -1017,20 +944,11 @@
   margin: 0em 1em;
   padding: 0em;
   height: auto !important;
+
   border-radius: 0px;
 
-  -webkit-box-shadow: none;
   box-shadow: none;
-
-  -webkit-transition:
-    opacity 0.2s ease
-  ;
-  -moz-transition:
-    opacity 0.2s ease
-  ;
-  transition:
-    opacity 0.2s ease
-  ;
+  transition: $textMenuTransition;
 }
 .ui.text.menu > .item:before {
   display: none !important;
@@ -1043,6 +961,11 @@
   font-size: 0.875rem;
   padding: 0em;
   text-transform: uppercase;
+  font-weight: bold;
+}
+.ui.text.menu .text.item {
+  opacity: 1;
+  color: rgba(50, 50, 50, 0.8);
   font-weight: bold;
 }
 
@@ -1068,7 +991,7 @@
 }
 .ui.vertical.text.menu .item > i.icon {
   float: none;
-  margin: 0em 0.83em 0em 0em;
+  margin: 0em $verticalPadding 0em 0em;
 }
 .ui.vertical.text.menu .header.item {
   margin: 0.8em 0em;
@@ -1087,17 +1010,14 @@
   border: none;
   opacity: 1;
   font-weight: bold;
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
 /* disable variations */
 .ui.text.pointing.menu .active.item:after {
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
 .ui.text.attached.menu {
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
@@ -1157,10 +1077,13 @@
 .ui.labeled.icon.menu {
   text-align: center;
 }
+.ui.labeled.icon.menu > .item {
+  min-width: $labeledIconMinWidth;
+}
 .ui.labeled.icon.menu > .item > .icon {
   display: block;
-  font-size: 1.5em !important;
-  margin: 0em auto 0.3em !important;
+  font-size: $labeledIconSize !important;
+  margin: 0em auto $labeledIconTextMargin !important;
 }
 
 
@@ -1174,36 +1097,47 @@
 ---------------*/
 
 /*--- Light Colors  ---*/
-.ui.menu .green.active.item,
-.ui.green.menu .active.item {
-  border-color: #A1CF64 !important;
-  color: #A1CF64 !important;
-}
-.ui.menu .red.active.item,
-.ui.red.menu .active.item {
-  border-color: #D95C5C !important;
-  color: #D95C5C !important;
-}
 .ui.menu .blue.active.item,
 .ui.blue.menu .active.item {
-  border-color: #6ECFF5 !important;
-  color: #6ECFF5 !important;
+  border-color: $blue !important;
+  color: $blue !important;
 }
-.ui.menu .purple.active.item,
-.ui.purple.menu .active.item {
-  border-color: #564F8A !important;
-  color: #564F8A !important;
+.ui.menu .green.active.item,
+.ui.green.menu .active.item {
+  border-color: $green !important;
+  color: $green !important;
 }
 .ui.menu .orange.active.item,
 .ui.orange.menu .active.item {
-  border-color: #F05940 !important;
-  color: #F05940 !important;
+  border-color: $orange !important;
+  color: $orange !important;
+}
+.ui.menu .pink.active.item,
+.ui.pink.menu .active.item {
+  border-color: $pink !important;
+  color: $pink !important;
+}
+.ui.menu .purple.active.item,
+.ui.purple.menu .active.item {
+  border-color: $purple !important;
+  color: $purple !important;
+}
+.ui.menu .red.active.item,
+.ui.red.menu .active.item {
+  border-color: $red !important;
+  color: $red !important;
 }
 .ui.menu .teal.active.item,
 .ui.teal.menu .active.item {
-  border-color: #00B5AD !important;
-  color: #00B5AD !important;
+  border-color: $teal !important;
+  color: $teal !important;
 }
+.ui.menu .yellow.active.item,
+.ui.yellow.menu .active.item {
+  border-color: $yellow !important;
+  color: $yellow !important;
+}
+
 
 
 /*--------------
@@ -1211,77 +1145,44 @@
 ---------------*/
 
 .ui.inverted.menu {
-  background-color: #333333;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  background: $invertedBackground;
+  box-shadow: $invertedBoxShadow;
 }
 .ui.inverted.menu .header.item {
   margin: 0em;
-
-  background-color: rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: none;
+  background: $invertedHeaderBackground;
   box-shadow: none;
 }
 
 .ui.inverted.menu .item,
-.ui.inverted.menu .item > a {
-  color: #FFFFFF;
+.ui.inverted.menu .item > a:not(.ui) {
+  color: $invertedTextColor;
 }
+
+.ui.inverted.menu .item:not(.dropdown).menu {
+  background: $invertedSubMenuBackground;
+}
+
 .ui.inverted.menu .item .item,
-.ui.inverted.menu .item .item > a {
-  color: rgba(255, 255, 255, 0.8);
+.ui.inverted.menu .item .item > a:not(.ui) {
+  color: $invertedSubMenuColor;
 }
-.ui.inverted.menu .dropdown .menu .item,
-.ui.inverted.menu .dropdown .menu .item a {
-  color: rgba(0, 0, 0, 0.75) !important;
+.ui.inverted.menu .dropdown .menu .item {
+  color: $dropdownTextColor !important;
 }
 .ui.inverted.menu .item.disabled,
 .ui.inverted.menu .item.disabled:hover {
-  color: rgba(255, 255, 255, 0.2);
+  color: $invertedDisabledTextColor;
 }
 
 
 
 /*--- Border ---*/
 .ui.inverted.menu .item:before {
-  background-image: -webkit-linear-gradient(
-    rgba(255, 255, 255, 0.03) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.03) 100%)
-  ;
-  background-image: -moz-linear-gradient(
-    rgba(255, 255, 255, 0.03) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.03) 100%)
-  ;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.03)), color-stop(50%, rgba(255, 255, 255, 0.1)), to(rgba(255, 255, 255, 0.03)));
-  background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.03) 100%);
-  background-image: -moz-linear-gradient(rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.03) 100%);
-  background-image: linear-gradient(
-    rgba(255, 255, 255, 0.03) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.03) 100%)
-  ;
+  background: $invertedDividerBackground;
 }
 .ui.vertical.inverted.menu .item:before {
-  background-image: -webkit-linear-gradient(left,
-    rgba(255, 255, 255, 0.03) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.03) 100%)
-  ;
-  background-image: -moz-linear-gradient(left,
-    rgba(255, 255, 255, 0.03) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.03) 100%)
-  ;
-  background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.03)), color-stop(50%, rgba(255, 255, 255, 0.1)), to(rgba(255, 255, 255, 0.03)));
-  background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.03) 100%);
-  background-image: -moz-linear-gradient(left, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.03) 100%);
-  background-image: linear-gradient(to right,
-    rgba(255, 255, 255, 0.03) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.03) 100%)
-  ;
+  background: $invertedVerticalDividerBackground;
 }
 
 /*--- Hover ---*/
@@ -1289,46 +1190,42 @@
 .ui.inverted.menu .link.item:hover,
 .ui.inverted.menu a.item:hover,
 .ui.inverted.menu .dropdown.item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background: $invertedHoverBackground;
+  color: $invertedHoverColor;
 }
-.ui.inverted.menu a.item:hover,
-.ui.inverted.menu .item > a:hover,
 .ui.inverted.menu .item .menu a.item:hover,
 .ui.inverted.menu .item .menu .link.item:hover {
-  color: rgba(255, 255, 255, 1);
+  background: $invertedSubMenuBackground;
+  color: $invertedSubMenuHoverColor;
 }
 
-/*--- Down ---*/
+/*--- Pressed ---*/
 .ui.inverted.menu a.item:active,
 .ui.inverted.menu .dropdown.item:active,
 .ui.inverted.menu .link.item:active,
 .ui.inverted.menu a.item:active {
-  background-color: rgba(255, 255, 255, 0.15);
+  background: $invertedMenuPressedBackground;
+  color: $invertedMenuPressedColor;
 }
 
 /*--- Active ---*/
 .ui.inverted.menu .active.item {
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
-  background-color: rgba(255, 255, 255, 0.2);
-}
-.ui.inverted.menu .active.item,
-.ui.inverted.menu .active.item a {
-  color: rgba(255, 255, 255, 1) !important;
+  box-shadow: none !important;
+  background: $invertedActiveBackground;
+  color: $invertedActiveColor !important;
 }
 .ui.inverted.vertical.menu .item .menu .active.item {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 1);
+  background: $invertedSubMenuActiveBackground;
+  color: $invertedSubMenuActiveColor;
 }
 
 /*--- Pointers ---*/
 .ui.inverted.pointing.menu .active.item:after {
-  background-color: #5B5B5B;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  background: #5B5B5B;
+  box-shadow: none;
 }
 .ui.inverted.pointing.menu .active.item:hover:after {
-  background-color: #4A4A4A;
+  background: #4A4A4A;
 }
 
 
@@ -1377,50 +1274,66 @@
 
 /*--- Light Colors  ---*/
 .ui.grey.menu {
-  background-color: #F0F0F0;
+  background-color: $offWhite;
 }
 
 /*--- Inverted Colors  ---*/
-.ui.inverted.green.menu {
-  background-color: #A1CF64;
-}
-.ui.inverted.green.pointing.menu .active.item:after {
-  background-color: #B3D782;
-}
 
-.ui.inverted.red.menu {
-  background-color: #D95C5C;
-}
-.ui.inverted.red.pointing.menu .active.item:after {
-  background-color: #DF7C7C;
-}
-
+/* Blue */
 .ui.inverted.blue.menu {
-  background-color: #6ECFF5;
+  background-color: $blue;
 }
 .ui.inverted.blue.pointing.menu .active.item:after {
-  background-color: #8AD7F6;
+  background-color: $blue;
 }
-
-.ui.inverted.purple.menu {
-  background-color: #564F8A;
+/* Green */
+.ui.inverted.green.menu {
+  background-color: $green;
 }
-.ui.inverted.purple.pointing.menu .active.item:after {
-  background-color: #7771A0;
+.ui.inverted.green.pointing.menu .active.item:after {
+  background-color: $green;
 }
-
+/* Orange */
 .ui.inverted.orange.menu {
-  background-color: #F05940;
+  background-color: $orange;
 }
 .ui.inverted.orange.pointing.menu .active.item:after {
-  background-color: #F27966;
+  background-color: $orange;
 }
-
+/* Pink */
+.ui.inverted.pink.menu {
+  background-color: $pink;
+}
+.ui.inverted.pink.pointing.menu .active.item:after {
+  background-color: $pink;
+}
+/* Purple */
+.ui.inverted.purple.menu {
+  background-color: $purple;
+}
+.ui.inverted.purple.pointing.menu .active.item:after {
+  background-color: $purple;
+}
+/* Red */
+.ui.inverted.red.menu {
+  background-color: $red;
+}
+.ui.inverted.red.pointing.menu .active.item:after {
+  background-color: $red;
+}
+/* Teal */
 .ui.inverted.teal.menu {
-  background-color: #00B5AD;
+  background-color: $teal;
 }
 .ui.inverted.teal.pointing.menu .active.item:after {
-  background-color: #33C3BC;
+  background-color: $teal;
+}
+/* Yellow */
+.ui.inverted.yellow.menu {
+  background-color: $yellow;
+}
+.ui.inverted.yellow.pointing.menu .active.item:after {
+  background-color: $yellow;
 }
 
 
@@ -1436,14 +1349,14 @@
 .ui.horizontally.fitted.menu .item,
 .ui.horizontally.fitted.menu .item .menu .item,
 .ui.menu .horizontally.fitted.item {
-  padding-top: 0.83em;
-  padding-bottom: 0.83em;
+  padding-top: $verticalPadding;
+  padding-bottom: $verticalPadding;
 }
 .ui.vertically.fitted.menu .item,
 .ui.vertically.fitted.menu .item .menu .item,
 .ui.menu .vertically.fitted.item {
-  padding-left: 0.95em;
-  padding-right: 0.95em;
+  padding-left: $horizontalPadding;
+  padding-right: $horizontalPadding;
 }
 
 /*--------------
@@ -1453,7 +1366,7 @@
 .ui.borderless.menu .item:before,
 .ui.borderless.menu .item .menu .item:before,
 .ui.menu .borderless.item:before {
-  background-image: none;
+  background: none;
 }
 
 /*-------------------
@@ -1494,7 +1407,9 @@
   padding-right: 0px !important;
   text-align: center;
 }
-
+.ui.item.menu > .item:last-child {
+  border-radius: 0px $borderRadius $borderRadius 0px;
+}
 .ui.menu.two.item .item {
   width: 50%;
 }
@@ -1528,6 +1443,7 @@
 .ui.menu.twelve.item .item {
   width: 8.333%;
 }
+
 
 /*--------------
      Fixed
@@ -1577,8 +1493,9 @@
 
 /* Coupling with Grid */
 .ui.fixed.menu + .ui.grid {
-  padding-top: 2.75rem;
+  padding-top: $fixedGridMargin;
 }
+
 
 /*-------------------
        Pointing
@@ -1586,32 +1503,22 @@
 
 .ui.pointing.menu .active.item:after {
   position: absolute;
-  bottom: -0.3em;
+  bottom: $arrowOffset;
   left: 50%;
-  content: "";
+  content: '';
 
-  margin-left: -0.3em;
-  width: 0.6em;
-  height: 0.6em;
+  margin-left: $arrowOffset;
+  width: $arrowSize;
+  height: $arrowSize;
 
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: $arrowBorder;
+  border-right: $arrowBorder;
 
-  background-image: none;
-
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-      transform: rotate(45deg);
+  background: none;
+  transform: rotate(45deg);
   z-index: 2;
 
-  -webkit-transition:
-    background 0.2s ease
-  ;
-  -moz-transition:
-    background 0.2s ease
-  ;
   transition:
     background 0.2s ease
   ;
@@ -1625,31 +1532,31 @@
 .ui.vertical.pointing.menu .active.item:after {
   position: absolute;
   top: 50%;
-  margin-top: -0.3em;
-  right: -0.4em;
+  margin-top: $arrowOffset;
+  right: $arrowOffset;
   bottom: auto;
   left: auto;
 
   border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: $arrowBorder;
+  border-right: $arrowBorder;
 }
 
 /* Colors */
-.ui.pointing.menu .active.item:after {
-  background-color: #FCFCFC;
-}
 .ui.pointing.menu .active.item:hover:after {
-  background-color: #FAFAFA;
+  background-color: $arrowHoverColor;
+}
+.ui.pointing.menu .active.item:after {
+  background-color: $arrowActiveColor;
 }
 
-.ui.vertical.pointing.menu .menu .active.item:after {
-  background-color: #F4F4F4;
+.ui.vertical.pointing.menu .item:hover:after {
+  background-color: $arrowVerticalHoverColor;
+}
+.ui.vertical.pointing.menu .active.item:after {
+  background-color: $arrowVerticalActiveColor;
 }
 
-.ui.pointing.menu a.active.item:active:after {
-  background-color: #F0F0F0;
-}
 
 
 /*--------------
@@ -1660,44 +1567,47 @@
   margin: 0rem;
   border-radius: 0px;
   /* avoid rgba multiplying */
-  -webkit-box-shadow: 0px 0px 0px 1px #DDDDDD;
-  box-shadow: 0px 0px 0px 1px #DDDDDD;
+  box-shadow: $attachedBoxShadow;
 }
 .ui.top.attached.menu {
-  border-radius: 0.1875em 0.1875em 0px 0px;
+  border-radius: $borderRadius $borderRadius 0em 0em;
 }
 .ui.menu.bottom.attached {
-  border-radius: 0px 0px 0.1875em 0.1875em;
+  border-radius: 0em 0em $borderRadius $borderRadius;
 }
 
 /*--------------
      Sizes
 ---------------*/
 
+/* Small */
 .ui.small.menu .item {
-  font-size: 0.875rem;
+  font-size: $small;
 }
 .ui.small.vertical.menu {
-  width: 13rem;
+  width: $smallWidth;
 }
 
+/* Medium */
 .ui.menu .item {
-  font-size: 1rem;
+  font-size: $medium;
 }
 .ui.vertical.menu {
-  width: 15rem;
+  width: $mediumWidth;
 }
 
-
+/* Large */
 .ui.large.menu .item {
-  font-size: 1.125rem;
+  font-size: $large;
 }
 .ui.large.menu .item .item {
-  font-size: 0.875rem;
+  font-size: $largeSubMenu;
 }
 .ui.large.menu .dropdown .item {
-  font-size: 1rem;
+  font-size: $largeDropdown;
 }
 .ui.large.vertical.menu {
-  width: 18rem;
+  width: $largeWidth;
 }
+
+@extend .loadUIOverrides;

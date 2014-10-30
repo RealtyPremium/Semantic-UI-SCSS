@@ -1,13 +1,23 @@
 /*
  * # Semantic - Reveal
- * http://github.com/jlukic/semantic-ui/
+ * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2014 Contributors
+ * Copyright 2014 Contributor
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
+
+/*******************************
+            Theme
+*******************************/
+
+$type    : 'element';
+$element : 'reveal';
+
+$import '../../theme.config';
+
 
 /*******************************
             Reveal
@@ -16,55 +26,21 @@
 .ui.reveal  {
   display: inline-block;
   position: relative !important;
-  z-index: 2 !important;
+  z-index: $bottomZIndex !important;
   font-size: 0em !important;
-}
-
-.ui.reveal > .content {
-  font-size: 1rem !important;
-}
-
-.ui.reveal > .visible.content {
-  -webkit-transition:
-    all 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s
-  ;
-  -moz-transition:
-    all 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s
-  ;
-  transition:
-    all 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s
-  ;
 }
 
 .ui.reveal > .visible.content {
   position: absolute !important;
   top: 0em !important;
   left: 0em !important;
-  z-index: 4 !important;
-  -webkit-transition:
-    all 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s
-  ;
-  -moz-transition:
-    all 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s
-  ;
-  transition:
-    all 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s
-  ;
+  z-index: $topZIndex !important;
+  transition: all $transitionDuration $transitionEasing $transitionDelay;
 }
 .ui.reveal > .hidden.content {
   position: relative !important;
-  z-index: 3 !important;
+  z-index: $bottomZIndex !important;
 }
-
-
-/*------------------
-   Loose Coupling
--------------------*/
-
-.ui.reveal.button {
-  overflow: hidden;
-}
-
 
 
 /*******************************
@@ -88,29 +64,12 @@
   display: block;
   float: left;
 
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-
   margin: 0em;
-  -webkit-transition:
-    top 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s,
-    left 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s,
-    right 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s,
-    bottom 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s
-  ;
-  -moz-transition:
-    top 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s,
-    left 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s,
-    right 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s,
-    bottom 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s
-  ;
   transition:
-    top 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s,
-    left 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s,
-    right 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s,
-    bottom 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s
+    top $transitionDuration $transitionEasing $transitionDelay,
+    left $transitionDuration $transitionEasing $transitionDelay,
+    right $transitionDuration $transitionEasing $transitionDelay,
+    bottom $transitionDuration $transitionEasing $transitionDelay
   ;
 }
 .ui.slide.reveal > .visible.content {
@@ -121,12 +80,10 @@
   left: 100% !important;
   width: 100% !important;
 }
-.ui.slide.reveal:hover > .visible.content,
-.ui.slide.reveal:focus > .visible.content, {
+.ui.slide.reveal:hover > .visible.content {
   left: -100% !important;
 }
-.ui.slide.reveal:hover > .hidden.content,
-.ui.slide.reveal:focus > .hidden.content {
+.ui.slide.reveal:hover > .hidden.content {
   left: 0% !important;
 }
 
@@ -137,13 +94,11 @@
   left: auto !important;
   right: 100% !important;
 }
-.ui.right.slide.reveal:hover > .visible.content,
-.ui.right.slide.reveal:focus > .visible.content {
+.ui.right.slide.reveal:hover > .visible.content {
   left: 100% !important;
   right: auto !important;
 }
-.ui.right.slide.reveal:hover > .hidden.content,
-.ui.right.slide.reveal:focus > .hidden.content {
+.ui.right.slide.reveal:hover > .hidden.content {
   left: auto !important;
   right: 0% !important;
 }
@@ -160,13 +115,11 @@
   right: auto !important;
   bottom: auto !important;
 }
-.ui.slide.up.reveal:hover > .visible.content,
-.ui.slide.up.reveal:focus > .visible.content {
+.ui.slide.up.reveal:hover > .visible.content {
   top: -100% !important;
   left: 0% !important;
 }
-.ui.slide.up.reveal:hover > .hidden.content,
-.ui.slide.up.reveal:focus > .hidden.content {
+.ui.slide.up.reveal:hover > .hidden.content {
   top: 0% !important;
   left: 0% !important;
 }
@@ -183,42 +136,27 @@
   bottom: 100% !important;
   left: 0% !important;
 }
-.ui.slide.down.reveal:hover > .visible.content,
-.ui.slide.down.reveal:focus > .visible.content {
+.ui.slide.down.reveal:hover > .visible.content {
   left: 0% !important;
   bottom: -100% !important;
 }
-.ui.slide.down.reveal:hover > .hidden.content,
-.ui.slide.down.reveal:focus > .hidden.content {
+.ui.slide.down.reveal:hover > .hidden.content {
   left: 0% !important;
   bottom: 0% !important;
 }
-
 
 
 /*--------------
       Fade
 ---------------*/
 
-.ui.fade.reveal > .hidden.content {
-  -webkit-transition:
-    opacity 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s
-  ;
-  -moz-transition:
-    opacity 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s
-  ;
-  transition:
-    opacity 0.8s cubic-bezier(0.175, 0.885, 0.320, 1) 0.15s
-  ;
-}
-
-.ui.fade.reveal > .hidden.content {
-  z-index: 5 !important;
-  opacity: 0;
-}
-.ui.fade.reveal:hover > .hidden.content {
+.ui.fade.reveal > .visible.content {
   opacity: 1;
 }
+.ui.fade.reveal:hover > .visible.content {
+  opacity: 0;
+}
+
 
 /*--------------
       Move
@@ -232,9 +170,7 @@
   right: 0% !important;
 }
 .ui.move.reveal:hover > .visible.content,
-.ui.move.left.reveal:hover > .visible.content,
-.ui.move.reveal:focus > .visible.content,
-.ui.move.left.reveal:focus > .visible.content {
+.ui.move.left.reveal:hover > .visible.content {
   right: 100% !important;
 }
 
@@ -244,8 +180,7 @@
   bottom: auto !important;
   left: 0% !important;
 }
-.ui.move.right.reveal:hover > .visible.content,
-.ui.move.right.reveal:focus > .visible.content {
+.ui.move.right.reveal:hover > .visible.content {
   left: 100% !important;
 }
 
@@ -256,8 +191,7 @@
 
   bottom: 0% !important;
 }
-.ui.move.up.reveal:hover > .visible.content,
-.ui.move.up.reveal:focus > .visible.content {
+.ui.move.up.reveal:hover > .visible.content {
   bottom: 100% !important;
 }
 
@@ -269,8 +203,7 @@
   top: 0% !important;
   bottom: auto !important;
 }
-.ui.move.down.reveal:hover > .visible.content,
-.ui.move.down.reveal:focus > .visible.content {
+.ui.move.down.reveal:hover > .visible.content {
   top: 100% !important;
 }
 
@@ -280,45 +213,24 @@
 ---------------*/
 
 .ui.rotate.reveal > .visible.content {
-  -webkit-transition-duration: 0.8s;
-  -moz-transition-duration: 0.8s;
-  transition-duration: 0.8s;
-
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
+  transition-duration: $transitionDuration;
   transform: rotate(0deg);
 }
 
 .ui.rotate.reveal > .visible.content,
 .ui.rotate.right.reveal > .visible.content {
-  -webkit-transform-origin: bottom right;
-  -moz-transform-origin: bottom right;
-  -ms-transform-origin: bottom right;
   transform-origin: bottom right;
 }
 .ui.rotate.reveal:hover > .visible.content,
-.ui.rotate.right.reveal:hover > .visible.content,
-.ui.rotate.reveal:focus > .visible.content,
-.ui.rotate.right.reveal:focus > .visible.content {
-  -webkit-transform: rotate(110deg);
-  -moz-transform: rotate(110deg);
-  -ms-transform: rotate(110deg);
-  transform: rotate(110deg);
+.ui.rotate.right.reveal:hover > .visible.content {
+  transform: rotate($rotateDegrees);
 }
 
 .ui.rotate.left.reveal > .visible.content {
-  -webkit-transform-origin: bottom left;
-  -moz-transform-origin: bottom left;
-  -ms-transform-origin: bottom left;
   transform-origin: bottom left;
 }
-.ui.rotate.left.reveal:hover > .visible.content,
-.ui.rotate.left.reveal:focus > .visible.content {
-  -webkit-transform: rotate(-110deg);
-  -moz-transform: rotate(-110deg);
-  -ms-transform: rotate(-110deg);
-  transform: rotate(-110deg);
+.ui.rotate.left.reveal:hover > .visible.content {
+  transform: rotate(-$rotateDegrees);
 }
 
 /*******************************
@@ -329,12 +241,9 @@
   opacity: 1 !important;
 }
 .ui.disabled.reveal > .content {
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
   transition: none !important;
 }
-.ui.disabled.reveal:hover > .visible.content,
-.ui.disabled.reveal:focus > .visible.content {
+.ui.disabled.reveal:hover > .visible.content {
   position: static !important;
   display: block !important;
   opacity: 1 !important;
@@ -342,13 +251,9 @@
   left: 0 !important;
   right: auto !important;
   bottom: auto !important;
-  -webkit-transform: none !important;
-     -moz-transform: none !important;
-      -ms-transform: none !important;
-          transform: none !important;
+  transform: none !important;
 }
-.ui.disabled.reveal:hover > .hidden.content,
-.ui.disabled.reveal:focus > .hidden.content {
+.ui.disabled.reveal:hover > .hidden.content {
   display: none !important;
 }
 
@@ -370,7 +275,14 @@
 ---------------*/
 
 .ui.instant.reveal > .content {
-  -webkit-transition-delay: 0s !important;
-  -moz-transition-delay: 0s !important;
   transition-delay: 0s !important;
+}
+
+
+/*--------------
+     Sizing
+---------------*/
+
+.ui.reveal > .content {
+  font-size: $medium !important;
 }

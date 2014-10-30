@@ -55,7 +55,7 @@ class Converter
     puts " repo   : #@repo_url"
     puts " branch : #@branch_sha #@repo_url/tree/#@branch"
     puts " save to: #{@save_to.to_json}"
-    puts " twbs cache: #{@cache_path}"
+    puts " converter cache: #{@cache_path}"
     puts '-' * 60
 
     @save_to.each { |_, v| FileUtils.mkdir_p(v) }

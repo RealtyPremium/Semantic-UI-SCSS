@@ -1,13 +1,22 @@
 /*
  * # Semantic - Input
- * http://github.com/jlukic/semantic-ui/
+ * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2014 Contributors
+ * Copyright 2014 Contributor
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
+
+/*******************************
+            Theme
+*******************************/
+
+$type    : 'element';
+$element : 'input';
+
+$import '../../theme.config';
 
 
 /*******************************
@@ -22,45 +31,27 @@
 .ui.input {
   display: inline-block;
   position: relative;
-
-  color: rgba(0, 0, 0, 0.7);
+  color: $inputColor;
 }
 .ui.input input {
-  width: 100%;
-  font-family: "Helvetica Neue", "Helvetica", Arial;
-
   margin: 0em;
-  padding: 0.65em 1em;
-  font-size: 1em;
-
-  background-color: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  width: 100%;
   outline: none;
+  text-align: $textAlign;
+  line-height: $lineHeight;
 
-  color: rgba(0, 0, 0, 0.7);
-  border-radius: 0.3125em;
+  font-family: $pageFont;
+  padding: $padding;
 
-  -webkit-transition:
-    background-color 0.3s ease-out,
-    -webkit-box-shadow 0.2s ease,
-    border-color 0.2s ease;
-  -moz-transition:
-    background-color 0.3s ease-out,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease
-  ;
-  transition:
-    background-color 0.3s ease-out,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease
-  ;
+  background: $background;
+  border: $border;
+  color: $inputColor;
+  border-radius: $borderRadius;
+  transition: $transition;
 
-  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
+  box-shadow: $boxShadow;
   box-sizing: border-box;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 }
 
 
@@ -69,11 +60,11 @@
 ---------------------*/
 
 /* browsers require these rules separate */
-.ui.input::-webkit-input-placeholder {
-  color: #BBBBBB;
+.ui.input input::-webkit-input-placeholder {
+  color: $placeholderColor;
 }
-.ui.input::-moz-placeholder {
-  color: #BBBBBB;
+.ui.input input::-moz-placeholder {
+  color: $placeholderColor;
 }
 
 
@@ -87,8 +78,10 @@
 
 .ui.input input:active,
 .ui.input.down input {
-  border-color: rgba(0, 0, 0, 0.3);
-  background-color: #FAFAFA;
+  border-color: $downBorderColor;
+  background: $downBackground;
+  color: $downColor;
+  box-shadow: $downBoxShadow;
 }
 
 /*--------------------
@@ -96,7 +89,7 @@
 ---------------------*/
 
 .ui.loading.input > .icon {
-  background: url(../images/loader-mini.gif) no-repeat 50% 50%;
+  background: url($loadingImage) no-repeat 50% 50%;
 }
 .ui.loading.input > .icon:before,
 .ui.loading.input > .icon:after {
@@ -109,16 +102,18 @@
 
 .ui.input.focus input,
 .ui.input input:focus  {
-  border-color: rgba(0, 0, 0, 0.2);
-  color: rgba(0, 0, 0, 0.85);
+  border-color: $focusBorderColor;
+  background: $focusBackground;
+  color: $focusColor;
+  box-shadow: $focusBoxShadow;
 }
 .ui.input.focus input input::-webkit-input-placeholder,
 .ui.input input:focus input::-webkit-input-placeholder {
-  color: #AAAAAA;
+  color: $placeholderFocusColor;
 }
 .ui.input.focus input input::-moz-placeholder,
 .ui.input input:focus input::-moz-placeholder {
-  color: #AAAAAA;
+  color: $placeholderFocusColor;
 }
 
 
@@ -127,39 +122,41 @@
 ---------------------*/
 
 .ui.input.error input {
-  background-color: #FFFAFA;
-  border-color: #E7BEBE;
-  color: #D95C5C;
+  background-color: $errorBackground;
+  border-color: $errorBorder;
+  color: $errorColor;
+  box-shadow: $errorBoxShadow;
 }
 
 /* Error Placeholder */
 .ui.input.error input ::-webkit-input-placeholder {
-  color: rgba(255, 80, 80, 0.4);
+  color: $placeholderErrorColor;
 }
 .ui.input.error input ::-moz-placeholder {
-  color: rgba(255, 80, 80, 0.4);
+  color: $placeholderErrorColor;
 }
+
+/* Focused Error Placeholder */
 .ui.input.error input :focus::-webkit-input-placeholder {
-  color: rgba(255, 80, 80, 0.7);
+  color: $placeholderErrorFocusColor;
 }
 .ui.input.error input :focus::-moz-placeholder {
-  color: rgba(255, 80, 80, 0.7);
+  color: $placeholderErrorFocusColor;
 }
 
 /*******************************
            Variations
 *******************************/
 
-
 /*--------------------
       Transparent
 ---------------------*/
 
 .ui.transparent.input input {
-  border: none;
+  border-color: transparent;
   background-color: transparent;
+  padding: 0em;
 }
-
 
 /*--------------------
          Icon
@@ -168,52 +165,66 @@
 .ui.icon.input > .icon {
   cursor: default;
   position: absolute;
-  opacity: 0.5;
+  opacity: $iconOpacity;
   top: 0px;
   right: 0px;
 
   margin: 0em;
-
-  width: 2.6em;
+  width: $iconWidth;
   height: 100%;
-  padding-top: 0.82em;
 
   text-align: center;
-  border-radius: 0em 0.3125em 0.3125em 0em;
 
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
+  border-radius: 0em $borderRadius $borderRadius 0em;
   box-sizing: border-box;
-
-  -webkit-transition: opacity 0.3s ease-out;
-  -moz-transition: opacity 0.3s ease-out;
-  transition: opacity 0.3s ease-out;
+  transition: $iconTransition;
+}
+.ui.icon.input > .icon:before,
+.ui.icon.input > .icon:after {
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 100%;
+  margin-top: $iconOffset;
 }
 .ui.icon.input > .link.icon {
   cursor: pointer;
 }
 .ui.icon.input input {
-  padding-right: 3em !important;
+  padding-right: $iconMargin !important;
 }
 .ui.icon.input > .circular.icon {
-  top: 0.35em;
-  right: 0.5em;
+  top: $circularIconVerticalOffset;
+  right: $circularIconHorizontalOffset;
 }
 
-/* Left Side */
-.ui.left.icon.input > .icon {
+/* Left Icon Input */
+.ui[class*="left icon"].input > .icon {
   right: auto;
-  left: 1px;
-  border-radius: 0.3125em 0em 0em 0.3125em;
+  left: $borderWidth;
+  border-radius: $borderRadius 0em 0em $borderRadius;
 }
-.ui.left.icon.input > .circular.icon {
+.ui[class*="left icon"].input > .circular.icon {
   right: auto;
-  left: 0.5em;
+  left: $circularIconHorizontalOffset;
 }
-.ui.left.icon.input > input {
-  padding-left: 3em !important;
-  padding-right: 1.2em !important;
+.ui[class*="left icon"].input > input {
+  padding-left: $iconMargin !important;
+  padding-right: $horizontalPadding !important;
+}
+
+/* Transparent Icon */
+.ui.transparent.icon.input > .icon {
+  width: $transparentIconWidth;
+}
+.ui.transparent.icon.input > input {
+  padding-left: 0em !important;
+  padding-right: $transparentIconMargin !important;
+}
+.ui.transparent[class*="left icon"].input > input {
+  padding-left: 0em !important;
+  padding-left: $transparentIconMargin !important;
 }
 
 /* Focus */
@@ -225,25 +236,82 @@
         Labeled
 ---------------------*/
 
-.ui.labeled.input .corner.label {
-  font-size: 0.7em;
-  border-radius: 0 0.3125em;
+
+/* Adjacent Label */
+.ui.labeled.input {
+  display: table;
 }
-.ui.labeled.input .left.corner.label {
-  border-radius: 0.3125em 0;
+.ui.labeled.input > input {
+  display: table-cell;
+  vertical-align: top;
+}
+.ui.labeled.input > .label {
+  display: table-cell;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-size: 1em;
+}
+.ui.labeled.input > .label > .icon {
+  display: inline;
+  vertical-align: top;
+}
+
+/* Fluid Labeled */
+.ui.fluid.labeled.input {
+  display: table;
+  width: 100%;
+}
+.ui.fluid.labeled.input > .label {
+  width: 0.01%;
+}
+
+/* Label on Left */
+.ui.labeled.input:not([class*="corner labeled"]):not([class*="right labeled"]) > input {
+  border-left: none;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.ui.labeled.input:not([class*="corner labeled"]):not([class*="right labeled"]) > .label {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+/* Label on Right */
+.ui[class*="right labeled"].input  > input {
+  border-right: none;
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+.ui[class*="right labeled"].input > .label {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+
+/* Corner Label */
+.ui.labeled.input .corner.label {
+  top: $labelCornerTop;
+  right: $labelCornerRight;
+  font-size: $labelCornerSize;
+  border-radius: 0em $borderRadius 0em 0em;
 }
 .ui.labeled.input input {
-  padding-right: 2.5em !important;
+  padding-right: $labeledMargin !important;
 }
 
 /* Spacing with corner label */
-.ui.labeled.icon.input:not(.left) > input {
-  padding-right: 3.25em !important;
+.ui[class*="corner labeled"].input {
+  display: inline-block;
 }
-.ui.labeled.icon.input:not(.left) > .icon {
-  margin-right: 1.25em;
+.ui[class*="corner labeled"].input > input {
+  display: block;
 }
-
+.ui[class*="corner labeled"].icon.input:not(.left) > input {
+  padding-right: $labeledIconInputMargin !important;
+}
+.ui[class*="corner labeled"].icon.input:not(.left) > .icon {
+  margin-right: $labeledIconMargin;
+}
 
 /*--------------------
         Action
@@ -255,16 +323,12 @@
 
 .ui.action.input > input {
   display: table-cell;
-  border-top-right-radius: 0px !important;
-  border-bottom-right-radius: 0px !important;
-  border-right: none;
+  vertical-align: top;
 }
 .ui.action.input > .button,
 .ui.action.input > .buttons {
   display: table-cell;
-
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+  vertical-align: middle;
   white-space: nowrap;
 }
 .ui.action.input > .button > .icon,
@@ -279,6 +343,30 @@
 }
 .ui.fluid.action.input > .button {
   width: 0.01%;
+}
+
+/* Button on Right */
+.ui.action.input:not([class*="left action"]) > input {
+  border-right: none;
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+.ui.action.input:not([class*="left action"]) > .button,
+.ui.action.input:not([class*="left action"]) > .buttons {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+/* Button on Left */
+.ui[class*="left action"].input > .button,
+.ui[class*="left action"].input > .buttons {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.ui[class*="left action"].input  > input {
+  border-left: none;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
 /*--------------------
@@ -313,5 +401,7 @@
   font-size: 1.375em;
 }
 .ui.massive.input {
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
+
+@extend .loadUIOverrides;
