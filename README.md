@@ -1,6 +1,6 @@
 # Semantic-UI-SCSS
 
-
+# NOTE: This repo is no longer maintained. Sorry!
 
 [![Build Status](https://travis-ci.org/RealtyPremium/Semantic-UI-SCSS.svg?branch=master)](https://travis-ci.org/RealtyPremium/Semantic-UI-SCSS)
 
